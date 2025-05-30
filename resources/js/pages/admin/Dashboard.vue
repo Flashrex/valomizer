@@ -1,0 +1,3 @@
+<template>
+    Admin Dashboard
+</template>
