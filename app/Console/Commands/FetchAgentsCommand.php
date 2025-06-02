@@ -49,6 +49,7 @@ class FetchAgentsCommand extends Command
                 $updatedAgents++;
 
             } else {
+                $agent['active'] = $agent['isPlayableCharacter'] ?? false;
                 Agent::create($agent);
                 $newAgents++;
             }
@@ -58,6 +59,6 @@ class FetchAgentsCommand extends Command
 
         $progressBar->finish();
         $this->info("\nAll agents have been processed successfully.");
-        $this->info("\nFound  $newAgents new Agents and updated  $updatedAgents Agents.");
+        $this->info("\nFound $newAgents new Agents and updated $updatedAgents Agents.");
     }
 }

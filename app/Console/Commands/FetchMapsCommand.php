@@ -48,6 +48,8 @@ class FetchMapsCommand extends Command
                 $existingMap->update($map);
                 $updatedMaps++;
             } else {
+                $existingMap['active'] = true;
+                $existingMap['gamemode'] = 'competitive';
                 Map::create($map);
                 $newMaps++;
             }

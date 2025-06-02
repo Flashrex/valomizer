@@ -13,6 +13,7 @@ class Agent extends Model
 
     public $fillable = [
         'uuid',
+        'active',
         'displayName',
         'description',
         'developerName',
@@ -39,11 +40,9 @@ class Agent extends Model
 
     protected $casts = [
         'backgroundGradientColors' => 'array',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $hidden = [];
 }

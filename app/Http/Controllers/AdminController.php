@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
+use App\Models\Map;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +12,11 @@ use Inertia\Inertia;
 class AdminController extends Controller
 {
     public function index() {
-        return Inertia::render('admin/Dashboard');
+        
+        return Inertia::render('admin/Dashboard', [
+            'agents' => Agent::all(),
+            'maps' => Map::all()
+        ]);
     }
 
     public function login() {

@@ -6,7 +6,7 @@
       <p class="text-sm">{{ t("This website is a tool for finding a random map or agent to play with.") }}
       </p>
       <br>
-      <p class="text-sm">{{ t('Data utilized here is provided by') }} <a class="link" style="color: var(--valorant-red)" href="https://valorant-api.com"
+      <p class="text-sm">{{ t('Data utilized here is provided by') }} <a class="link text-valorant" href="https://valorant-api.com"
           target="_blank">valorant-api.com</a>.</p>
     </section>
 
@@ -42,7 +42,7 @@
       <h1 class="text-2xl font-bold">{{ t('Contact') }}</h1>
       <p class="text-sm">
         {{ t('If you have any questions or suggestions, feel free to contact me at') }} 
-        <a class="link" style="color: var(--valorant-red)" href="mailto:flashrexwastaken@gmail.com">
+        <a class="link text-valorant" href="mailto:flashrexwastaken@gmail.com">
           flashrexwastaken@gmail.com
         </a>
       </p>
