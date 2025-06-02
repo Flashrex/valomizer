@@ -154,9 +154,13 @@ import timerIcon from '@/assets/icons/timer.svg';
 
 import deleteIcon from '@/assets/icons/delete.svg';
 import { useForm } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { filterSortPaginate } from '@/util';
 const { t } = useI18n();
+
+defineOptions({
+    layout: AdministrationLayout,
+});
 
 const props = defineProps<{
     agents: Array<Agent>;
@@ -245,6 +249,12 @@ function toggleAgent(agent: Agent) {
 
     form.patch(route('agent.update', agent.id), {
         preserveScroll: true,
+        onSuccess: () => {
+            notify.info(t('Agent status updated successfully!'));
+        },
+        onError: (errors) => {
+            notify.error(t('Failed to update agent status: {errors}', { errors: Object.values(errors).join(', ') }));
+        },
     });
 }
 
@@ -254,7 +264,10 @@ function deleteAgent(agentId: number) {
         form.delete(route('agent.destroy', agentId), {
             preserveScroll: true,
             onSuccess: () => {
-                // Optionally, you can show a success message or perform other actions
+                notify.info(t('Agent deleted successfully!'));
+            },
+            onError: (errors) => {
+                notify.error(t('Failed to delete agent: {errors}', { errors: Object.values(errors).join(', ') }));
             },
         });
     }
@@ -307,6 +320,12 @@ const toggleMap = (map: Map) => {
 
     form.patch(route('map.update', map.id), {
         preserveScroll: true,
+        onSuccess: () => {
+            notify.info(t('Map status updated successfully!'));
+        },
+        onError: (errors) => {
+            notify.error(t('Failed to update map status: {errors}', { errors: Object.values(errors).join(', ') }));
+        },
     });
 };
 
@@ -324,6 +343,12 @@ function updateGamemode(event: Event, map: Map) {
 
     form.patch(route('map.update', map.id), {
         preserveScroll: true,
+        onSuccess: () => {
+            notify.info(t('Gamemode updated successfully!'));
+        },
+        onError: (errors) => {
+            notify.error(t('Failed to update gamemode: {errors}', { errors: Object.values(errors).join(', ') }));
+        },
     });
 }
 
@@ -333,9 +358,16 @@ function deleteMap(mapId: number) {
         form.delete(route('map.destroy', mapId), {
             preserveScroll: true,
             onSuccess: () => {
-                // Optionally, you can show a success message or perform other actions
+                notify.info(t('Map deleted successfully!'));
+            },
+            onError: (errors) => {
+                notify.error(t('Failed to delete map: {errors}', { errors: Object.values(errors).join(', ') }));
             },
         });
     }
 }
+
+import { useNotifications } from '@/composables/useNotification';
+import AdministrationLayout from '@/layouts/AdministrationLayout.vue';
+const notify = useNotifications();
 </script>

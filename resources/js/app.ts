@@ -7,6 +7,7 @@ import { createApp, h } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
+import Notification from './components/Notification.vue';
 
 import de from './locales/de.json';
 import en from './locales/en.json';
@@ -44,6 +45,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(i18n)
+            .component('Notification', Notification)
             .mount(el);
     },
     progress: {

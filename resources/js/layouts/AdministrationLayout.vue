@@ -1,7 +1,6 @@
 <template>
     <Notification />
     <div class="flex">
-        <Sidebar />
         <main class="w-full">
             <slot />
         </main>
@@ -10,5 +9,4 @@
 
 <script lang="ts" setup>
 import Notification from '@/components/Notification.vue';
-import Sidebar from '@/components/Sidebar.vue';
 </script>

@@ -29,9 +29,13 @@
 
 <script setup lang="ts">
 import Card from '@/components/Card.vue';
+import AdministrationLayout from '@/layouts/AdministrationLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 import { Head } from '@inertiajs/vue3';
 
+defineOptions({
+    layout: AdministrationLayout,
+});
 
 const form = useForm({
     email: '',
