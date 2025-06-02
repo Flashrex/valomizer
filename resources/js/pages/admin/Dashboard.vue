@@ -41,34 +41,43 @@
                 :page="agentData.page"
                 :perPage="agentData.perPage"
                 :columns="agentData.columns"
+                :data="filteredAgents"
                 :total="agentData.searchQuery ? filteredAgents.length : agents.length"
                 :search="['UUID', 'Name', 'Role']"
+                :sorted-by="agentData.sortBy"
+                :sort-order="agentData.sortOrder"
                 @update:page="agentData.page = $event"
                 @search="agentData.searchQuery = $event"
+                @sort="(sortBy: string) => {
+                    agentData.sortBy = sortBy;
+                    agentData.sortOrder = agentData.sortOrder === 'asc' ? 'desc' : 'asc';
+                }"
             >
-                <template #body>
-                    <tr v-for="agent in filteredAgents" :key="agent.uuid" class="divide-x divide-gray-300">
-                        <td class="p-1 text-left">{{ agent.displayName }}</td>
-                        <td class="p-1 text-left">{{ agent.role.displayName }}</td>
-                        <td class="px-1 text-center align-middle">
-                            <img :src="agent.displayIconSmall" :alt="agent.displayName" class="inline-block h-8 w-8" />
-                        </td>
-                        <td class="flex items-center justify-center p-1 text-left">
-                            <form @submit.prevent="toggleAgent(agent)">
-                                <input type="checkbox" :checked="agent.active" @change="toggleAgent(agent)" class="h-4 w-4" />
-                            </form>
-                        </td>
-                        <td class="p-1 text-left">{{ agent.updated_at }}</td>
-                        <td class="p-1 text-left">{{ agent.created_at }}</td>
-                        <td class="flex items-center justify-center gap-2 p-1">
-                            <Button :color="'danger'" @click="deleteAgent(agent.id)">
-                                <template #pre>
-                                    <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
-                                </template>
-                                {{ t('Delete') }}
-                            </Button>
-                        </td>
-                    </tr>
+                <template #col-displayIconSmall="{ row }">
+                    <img :src="row.displayIconSmall" :alt="row.displayName" class="inline-block h-8 w-8" />
+                </template>
+
+                <template #col-active="{ row }">
+                    <form @submit.prevent="toggleAgent(row as Agent)">
+                        <input
+                            type="checkbox"
+                            :checked="row.active"
+                            @change="toggleAgent(row as Agent)"
+                            class="h-4 w-4"
+                        />
+                    </form>
+
+                </template>
+
+                <template #col-actions="{ row }">
+                    <div class="flex items-center justify-center gap-2 p-1">
+                        <Button :color="'danger'" @click="deleteAgent(row.id)">
+                            <template #pre>
+                                <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
+                            </template>
+                            {{ t('Delete') }}
+                        </Button>
+                    </div>
                 </template>
             </Table>
         </section>
@@ -79,40 +88,50 @@
                 :page="mapData.page"
                 :perPage="mapData.perPage"
                 :columns="mapData.columns"
+                :data="filteredMaps"
                 :total="mapData.searchQuery ? filteredMaps.length : maps.length"
                 :search="['UUID', 'Name', 'Gamemode']"
+                :sorted-by="mapData.sortBy"
+                :sort-order="mapData.sortOrder"
                 @update:page="mapData.page = $event"
                 @search="mapData.searchQuery = $event"
+                @sort="(sortBy: string) => {
+                    mapData.sortBy = sortBy;
+                    mapData.sortOrder = mapData.sortOrder === 'asc' ? 'desc' : 'asc';
+                }"
             >
-                <template #body>
-                    <tr v-for="map in filteredMaps" :key="map.uuid" class="divide-x divide-gray-300">
-                        <td class="p-1 text-left">{{ map.displayName }}</td>
-                        <td class="p-1 text-left">
-                            <select v-model="map.gamemode" class="rounded border p-1" @change="updateGamemode($event, map)">
-                                <option v-for="mode in gamemodes" :key="mode.value" :value="mode.value" class="text-secondary">
-                                    {{ mode.label }}
-                                </option>
-                            </select>
-                        </td>
-                        <td class="px-1 text-center align-middle">
-                            <img :src="map.displayIcon" :alt="map.displayName" class="inline-block h-8 w-8" />
-                        </td>
-                        <td class="flex items-center justify-center p-1 text-left">
-                            <form @submit.prevent="toggleMap(map)">
-                                <input type="checkbox" :checked="map.active" @change="toggleMap(map)" class="h-4 w-4" />
-                            </form>
-                        </td>
-                        <td class="p-1 text-left">{{ map.updated_at }}</td>
-                        <td class="p-1 text-left">{{ map.created_at }}</td>
-                        <td class="flex items-center justify-center gap-2 p-1">
-                            <Button :color="'danger'" @click="deleteMap(map.id)">
-                                <template #pre>
-                                    <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
-                                </template>
-                                {{ t('Delete') }}
-                            </Button>
-                        </td>
-                    </tr>
+                <template #col-displayIcon="{ row }">
+                    <img :src="row.displayIcon" :alt="row.displayName" class="inline-block h-8 w-8" />
+                </template>
+
+                <template #col-active="{ row }">
+                    <form @submit.prevent="toggleMap(row as Map)">
+                        <input
+                            type="checkbox"
+                            :checked="row.active"
+                            @change="toggleMap(row as Map)"
+                            class="h-4 w-4"
+                        />
+                    </form>
+                </template>
+
+                <template #col-gamemode="{ row }">
+                    <select v-model="row.gamemode" class="rounded border p-1" @change="updateGamemode($event, row as Map)">
+                        <option v-for="mode in gamemodes" :key="mode.value" :value="mode.value" class="text-secondary">
+                            {{ mode.label }}
+                        </option>
+                    </select>
+                </template>
+
+                <template #col-actions="{ row }">
+                    <div class="flex items-center justify-center gap-2 p-1">
+                        <Button :color="'danger'" @click="deleteMap(row.id)">
+                            <template #pre>
+                                <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
+                            </template>
+                            {{ t('Delete') }}
+                        </Button>
+                    </div>
                 </template>
             </Table>
         </section>
@@ -134,6 +153,7 @@ import timerIcon from '@/assets/icons/timer.svg';
 import deleteIcon from '@/assets/icons/delete.svg';
 import { useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
+import { filterSortPaginate } from '@/util';
 const { t } = useI18n();
 
 const props = defineProps<{
@@ -149,40 +169,30 @@ const agentData = ref({
     searchQuery: '',
     sortBy: 'displayName',
     sortOrder: 'asc',
-    columns: ['DisplayName', 'Role', 'DisplayIconSmall', 'Active', 'Last Updated', 'Created At', 'Actions'],
+    columns: [
+        { label: 'DisplayName', value: 'displayName', align: 'left' as 'left'| 'center' | 'right', sortable: true },
+        { label: 'Role', value: 'role.displayName', align: 'left' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Icon', value: 'displayIconSmall', align: 'center' as 'left'| 'center' | 'right'},
+        { label: 'Active', value: 'active', align: 'center' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Last Updated', value: 'updated_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Created At', value: 'created_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Actions', value: 'actions', align: 'center' as 'left'| 'center' | 'right'}
+    ],
 });
 
-const filteredAgents = computed(() => {
-    const query = agentData.value.searchQuery.toLowerCase();
-    const filtered = props.agents.filter((agent) => {
-        return (
-            agent.displayName.toLowerCase().includes(query) ||
-            agent.uuid.toLowerCase().includes(query) ||
-            agent.role.displayName.toLowerCase().includes(query)
-        );
-    });
-
-    if (filtered.length === 0) {
-        return [];
-    }
-
-    // Sort the filtered agents
-    filtered.sort((a: Agent, b: Agent) => {
-        const key = agentData.value.sortBy as keyof Agent;
-        const aValue = a[key];
-        const bValue = b[key];
-
-        if (aValue < bValue) {
-            return agentData.value.sortOrder === 'asc' ? -1 : 1;
-        } else if (aValue > bValue) {
-            return agentData.value.sortOrder === 'asc' ? 1 : -1;
-        }
-        return 0;
-    });
-
-    const start = (agentData.value.page - 1) * agentData.value.perPage;
-    return filtered.slice(start, start + agentData.value.perPage);
-});
+const filteredAgents = computed(() =>
+  filterSortPaginate(
+    props.agents,
+    {
+        page: agentData.value.page,
+        perPage: agentData.value.perPage,
+        searchQuery: agentData.value.searchQuery,
+        sortBy: agentData.value.sortBy,
+        sortOrder: agentData.value.sortOrder as 'asc' | 'desc',
+    },
+    ['displayName', 'uuid', 'role.displayName']
+  )
+);
 
 function toggleAgent(agent: Agent) {
     const form = useForm({
@@ -206,6 +216,7 @@ function deleteAgent(agentId: number) {
     }
 }
 
+
 /****** ****** ****** ****** ****** ****** Maps ****** ****** ****** ****** ****** ******/
 
 const mapData = ref({
@@ -214,7 +225,15 @@ const mapData = ref({
     searchQuery: '',
     sortBy: 'displayName',
     sortOrder: 'asc',
-    columns: ['DisplayName', 'Gamemode', 'DisplayIcon', 'Active', 'Last Updated', 'Created At', 'Actions'],
+    columns: [
+        { label: 'DisplayName', value: 'displayName', align: 'left' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Gamemode', value: 'gamemode', align: 'center' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Icon', value: 'displayIcon', align: 'center' as 'left'| 'center' | 'right'},
+        { label: 'Active', value: 'active', align: 'center' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Last Updated', value: 'updated_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Created At', value: 'created_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
+        { label: 'Actions', value: 'actions', align: 'center' as 'left'| 'center' | 'right'}
+    ],
 });
 
 const gamemodes = ref([
@@ -223,32 +242,19 @@ const gamemodes = ref([
     { value: 'training', label: 'Training' },
 ]);
 
-const filteredMaps = computed(() => {
-    const query = mapData.value.searchQuery.toLowerCase();
-    const filtered = props.maps.filter((map) => {
-        return map.displayName.toLowerCase().includes(query) || map.uuid.toLowerCase().includes(query) || map.gamemode.toLowerCase().includes(query);
-    });
-
-    if (filtered.length === 0) {
-        return [];
-    }
-
-    filtered.sort((a: Map, b: Map) => {
-        const key = mapData.value.sortBy as keyof Map;
-        const aValue = a[key];
-        const bValue = b[key];
-
-        if (aValue < bValue) {
-            return mapData.value.sortOrder === 'asc' ? -1 : 1;
-        } else if (aValue > bValue) {
-            return mapData.value.sortOrder === 'asc' ? 1 : -1;
-        }
-        return 0;
-    });
-
-    const start = (mapData.value.page - 1) * mapData.value.perPage;
-    return filtered.slice(start, start + mapData.value.perPage);
-});
+const filteredMaps = computed(() =>
+  filterSortPaginate(
+    props.maps,
+    {
+        page: mapData.value.page,
+        perPage: mapData.value.perPage,
+        searchQuery: mapData.value.searchQuery,
+        sortBy: mapData.value.sortBy,
+        sortOrder: mapData.value.sortOrder as 'asc' | 'desc',
+    },
+    ['displayName', 'uuid', 'gamemode']
+  )
+);
 
 const toggleMap = (map: Map) => {
     const form = useForm({
