@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Agent;
+use App\Models\Statistics;
 use App\Services\ValorantApiService;
 use Illuminate\Console\Command;
 
@@ -57,7 +58,13 @@ class FetchAgentsCommand extends Command
             $progressBar->advance();
         }
 
+        Statistics::updateOrCreate(
+            ['key' => 'fetched_agents'],
+            ['value' => now()->format('d-m-Y H:i:s')]
+        );
+
         $progressBar->finish();
+
         $this->info("\nAll agents have been processed successfully.");
         $this->info("\nFound $newAgents new Agents and updated $updatedAgents Agents.");
     }

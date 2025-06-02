@@ -39,7 +39,7 @@
                 <td 
                     v-for="column in columns" 
                     :key="column.value" 
-                    class="px-2 py-1"
+                    class="px-2 py-1 text-xs text-muted-foreground"
                     :class="{
                         'text-left': column.align === 'left',
                         'text-center': column.align === 'center',

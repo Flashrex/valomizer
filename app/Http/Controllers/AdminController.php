@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Map;
+use App\Models\Statistics;
 use App\Models\User;
+use App\Models\Visits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -15,7 +17,13 @@ class AdminController extends Controller
         
         return Inertia::render('admin/Dashboard', [
             'agents' => Agent::all(),
-            'maps' => Map::all()
+            'maps' => Map::all(),
+            'visits' => Visits::count(),
+            'uptime' => Statistics::where('key', 'boot_time')->first()?->value ?? now()->format('d-m-Y H:i:s'),
+            'agentCount' => Agent::count(),
+            'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->fetched_agents ?? now()->format('d-m-Y H:i:s'),
+            'mapCount' => Map::count(),
+            'fetchedMaps' => Statistics::where('key', 'fetched_maps')->first()?->fetched_maps ?? now()->format('d-m-Y H:i:s'),
         ]);
     }
 
@@ -27,7 +35,7 @@ class AdminController extends Controller
         
         $credentials = $request->only('email', 'password');
 
-        $user = User::where('email', $credentials['email'])->first();
+        $user = User::where('email', strtolower($credentials['email']))->first();
 
         if (!$user || !password_verify($credentials['password'], $user->password)) {
             return redirect()->back()->withErrors([

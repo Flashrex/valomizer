@@ -1,18 +1,19 @@
 <template>
+    <Head title="Dashboard" />
     <div class="mx-auto w-[60vw]">
         <section id="cards" class="p-4">
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
                         <p>{{ t('Total Visits') }}</p>
-                        <h2 class="text-valorant text-xl font-bold">1337</h2>
+                        <h2 class="text-valorant text-xl font-bold">{{ visits }}</h2>
                     </div>
                     <img :src="eyeIcon" alt="visits icon" class="h-16 w-16" />
                 </Card>
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
                         <p>{{ t('Uptime') }}</p>
-                        <h2 class="text-valorant text-xl font-bold">24d 15h 33m</h2>
+                        <h2 class="text-valorant text-xl font-bold">{{ uptime }}</h2>
                     </div>
                     <img :src="timerIcon" alt="uptime icon" class="h-16 w-16" />
                 </Card>
@@ -20,15 +21,15 @@
                     <div class="flex flex-col items-start">
                         <p>{{ t('Agents') }}</p>
                         <h2 class="text-valorant text-xl font-bold">{{ agents.length }}</h2>
-                        <span class="text-xs">Last updated: 24.05.2025 13:37</span>
+                        <span class="text-xs">Last updated: {{ fetchedAgents  }}</span>
                     </div>
                     <img :src="agentIcon" alt="agents icon" class="inverted h-16 w-16" />
                 </Card>
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
                         <p>{{ t('Maps') }}</p>
-                        <h2 class="text-valorant text-xl font-bold">17 Maps</h2>
-                        <span class="text-xs">Last updated: 24.05.2025 13:37</span>
+                        <h2 class="text-valorant text-xl font-bold">{{ maps.length }}</h2>
+                        <span class="text-xs">Last updated: {{ fetchedMaps }}</span>
                     </div>
                     <img :src="mapIcon" alt="maps icon" class="inverted h-16 w-16" />
                 </Card>
@@ -144,6 +145,7 @@ import Card from '@/components/Card.vue';
 import Table from '@/components/Table.vue';
 import { Agent, Map } from '@/types';
 import { useI18n } from 'vue-i18n';
+import { Head } from '@inertiajs/vue3';
 
 import agentIcon from '@/assets/icons/agent.svg';
 import eyeIcon from '@/assets/icons/eye.svg';
@@ -159,7 +161,49 @@ const { t } = useI18n();
 const props = defineProps<{
     agents: Array<Agent>;
     maps: Array<Map>;
+    visits: number;
+    uptime: string;
+    totalAgents: number;
+    fetchedAgents: string;
+    totalMaps: number;
+    fetchedMaps: string;
 }>();
+
+const uptime = computed(() => {
+    //Uptime is a string as carbon date datetime:Y-m-d H:i:s
+
+    const uptimeDate = new Date(props.uptime);
+    const now = new Date();
+    const diff = now.getTime() - uptimeDate.getTime();
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(months / 12);
+
+    let uptimeString = '';
+    if (years > 0) {
+        uptimeString += `${years} ${t('y', { count: years })} `;
+    }
+    if (months > 0) {
+        uptimeString += `${months % 12} ${t('m', { count: months % 12 })} `;
+    }
+    if (days > 0) {
+        uptimeString += `${days % 30} ${t('d', { count: days % 30 })} `;
+    }
+    if (hours > 0) {
+        uptimeString += `${hours % 24} ${t('h', { count: hours % 24 })} `;
+    }
+    if (minutes > 0) {
+        uptimeString += `${minutes % 60} ${t('m', { count: minutes % 60 })} `;
+    }
+    if (seconds > 0) {
+        uptimeString += `${seconds % 60} ${t('s', { count: seconds % 60 })}`;
+    }
+    return uptimeString.trim() || t('just now');
+});
 
 /****** ****** ****** ****** ****** ****** Agents ****** ****** ****** ****** ****** ******/
 

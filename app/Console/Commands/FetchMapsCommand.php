@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Map;
+use App\Models\Statistics;
 use App\Services\ValorantApiService;
 use Illuminate\Console\Command;
 
@@ -56,6 +57,11 @@ class FetchMapsCommand extends Command
 
             $progressBar->advance();
         }
+
+        Statistics::updateOrCreate(
+            ['key' => 'fetched_maps'],
+            ['value' => now()->format('d-m-Y H:i:s')]
+        );
 
         $progressBar->finish();
         $this->info("\nAll maps have been processed successfully.");

@@ -64,6 +64,7 @@
     --color-success-accent: var(--success-accent);
 
     --color-valorant: var(--valorant-red);
+    --color-valorant-accent: var(--valorant-red-accent);
 }
 
 /*
@@ -132,6 +133,8 @@
     --sidebar: hsl(0 0% 98%);
 
     --valorant-red: hsl(354, 98%, 63%);
+    --valorant-red-accent: hsl(354, 98%, 60%);
+
     --success-green: hsl(122, 39%, 49%);
     --success-accent: hsl(122, 39%, 43%);
 }
