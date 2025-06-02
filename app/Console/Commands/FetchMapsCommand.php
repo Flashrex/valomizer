@@ -60,7 +60,7 @@ class FetchMapsCommand extends Command
 
         Statistics::updateOrCreate(
             ['key' => 'fetched_maps'],
-            ['value' => now()->format('d-m-Y H:i:s')]
+            ['comment' => "Fetched {$newMaps} new maps and updated {$updatedMaps} existing maps."]
         );
 
         $progressBar->finish();

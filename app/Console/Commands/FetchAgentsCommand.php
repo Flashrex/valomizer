@@ -60,7 +60,7 @@ class FetchAgentsCommand extends Command
 
         Statistics::updateOrCreate(
             ['key' => 'fetched_agents'],
-            ['value' => now()->format('d-m-Y H:i:s')]
+            ['comment' => "Fetched {$newAgents} new agents and updated {$updatedAgents} existing agents."]
         );
 
         $progressBar->finish();

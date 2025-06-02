@@ -25,8 +25,8 @@ class FetchAllCommand extends Command
      */
     public function handle()
     {
-        $this->call('valomizer:fetch-agents');
-        $this->call('valomizer:fetch-maps');
+        $this->call(FetchAgentsCommand::class);
+        $this->call(FetchMapsCommand::class);
         $this->info('All data fetched successfully.');
     }
 }

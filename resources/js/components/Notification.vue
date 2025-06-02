@@ -1,8 +1,9 @@
 <template>
-    <div class="fixed top-4 right-4 z-50 flex flex-col gap-2">
+    <div class="fixed top-4 right-4 z-50 flex flex-col">
         <TransitionGroup name="slide" tag="div">
             <div v-for="notification in notifications" :key="notification.id"
-                class="px-8 py-4 rounded-lg shadow text-primary bg-accent">
+                class="px-8 py-4 rounded-lg shadow text-primary bg-accent relative mt-2"
+            >
                 <div class="absolute left-0 top-0 w-4 h-full rounded-l" :class="[
                     notification.type === 'info' && 'bg-blue-500',
                     notification.type === 'warning' && 'bg-yellow-500',
@@ -21,10 +22,8 @@
                         <p class="text-sm">{{ notification.message }}</p>
                     </div>
                 </div>
-
             </div>
         </TransitionGroup>
-
     </div>
 </template>
 

@@ -29,8 +29,8 @@ class StartupCommand extends Command
         $this->info('Executing startup command...');
 
         Statistics::updateOrCreate(
-            ['key' => 'fetched_agents'],
-            ['value' => now()->format('d-m-Y H:i:s')]
+            ['key' => 'startup'],
+            ['comment' => '']
         );
 
         $this->call('valomizer:fetch-agents');
