@@ -9,9 +9,7 @@
         }"
     >
         <slot name="pre" />
-        <span class="text-lg font-bold text-white">
-            <slot />
-        </span>
+        <slot />
         <slot name="post" />
     </button>
 </template>

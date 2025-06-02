@@ -71,12 +71,12 @@
                 </template>
 
                 <template #col-actions="{ row }">
-                    <div class="flex items-center justify-center gap-2 p-1">
+                    <div class="flex items-center justify-center gap-2 p-1.5">
                         <Button :color="'danger'" @click="deleteAgent(row.id)">
                             <template #pre>
                                 <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
                             </template>
-                            {{ t('Delete') }}
+                            <span class="text-xs text-primary">{{ t('Delete') }}</span>
                         </Button>
                     </div>
                 </template>
