@@ -4,9 +4,9 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
+import { createI18n } from 'vue-i18n';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
-import { createI18n  } from 'vue-i18n';
 
 import de from './locales/de.json';
 import en from './locales/en.json';
@@ -33,7 +33,7 @@ const i18n = createI18n({
     messages: {
         en: en,
         de: de,
-    }
+    },
 });
 
 createInertiaApp({

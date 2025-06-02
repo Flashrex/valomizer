@@ -1,22 +1,22 @@
 <template>
-    <nav class="w-24 bg-card h-screen flex flex-col items-center p-4 gap-8">
-        <img :src="ValorantLogo" alt="valorant logo" class="w-16 h-16 mb-4" />
+    <nav class="bg-card flex h-screen w-24 flex-col items-center gap-8 p-4">
+        <img :src="ValorantLogo" alt="valorant logo" class="mb-4 h-16 w-16" />
         <ul class="flex flex-col items-center justify-center gap-8">
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'agents' }">
                 <Link href="/" class="flex flex-col items-center justify-center">
-                    <img :src="AgentIcon" alt="agent icon" class="w-8 h-8 inverted" />
+                    <img :src="AgentIcon" alt="agent icon" class="inverted h-8 w-8" />
                     <span>{{ t('Agents') }}</span>
                 </Link>
             </li>
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'maps' }">
                 <Link href="maps" class="flex flex-col items-center justify-center">
-                    <img :src="MapIcon" alt="maps icon" class="w-8 h-8 inverted" />
+                    <img :src="MapIcon" alt="maps icon" class="inverted h-8 w-8" />
                     <span>{{ t('Maps') }}</span>
                 </Link>
             </li>
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'about' }">
                 <Link href="about" class="flex flex-col items-center justify-center">
-                    <img :src="AboutIcon" alt="about icon" class="w-8 h-8 inverted" />
+                    <img :src="AboutIcon" alt="about icon" class="inverted h-8 w-8" />
                     <span>{{ t('About') }}</span>
                 </Link>
             </li>
@@ -25,17 +25,17 @@
 </template>
 
 <script lang="ts" setup>
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
 
-import ValorantLogo from '@/assets/icons/valorant_logo.svg'
-import AgentIcon from '@/assets/icons/agent.svg'
-import MapIcon from '@/assets/icons/map.svg'
-import AboutIcon from '@/assets/icons/about.svg'
+import AboutIcon from '@/assets/icons/about.svg';
+import AgentIcon from '@/assets/icons/agent.svg';
+import MapIcon from '@/assets/icons/map.svg';
+import ValorantLogo from '@/assets/icons/valorant_logo.svg';
 
-import { useI18n } from 'vue-i18n'
-import { route } from '../../../vendor/tightenco/ziggy/src/js'
-import { nextTick, ref } from 'vue'
-const { t } = useI18n()
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { route } from '../../../vendor/tightenco/ziggy/src/js';
+const { t } = useI18n();
 
 const currentRoute = ref(route().current());
 </script>
