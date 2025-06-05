@@ -11,7 +11,7 @@
                 ]"></div>
                 <button
                     class="absolute top-0.5 right-2 text-primary hover:text-gray-300 focus:outline-none cursor-pointer"
-                    @click="notification.dismiss()">
+                    @click="dismiss(notification.id)">
                     &times;
                 </button>
                 <div class="flex items-center gap-4 justify-center ml-4">
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { useNotifications } from '@/composables/useNotification';
-const { notifications } = useNotifications();
+const { notifications, dismiss } = useNotifications();
 
 import errorIcon from '@/assets/icons/dangerous.svg';
 import infoIcon from '@/assets/icons/info.svg';
