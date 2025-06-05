@@ -9,7 +9,7 @@ import Errors from '@/components/Error.vue';
 import Card from './Card.vue';
 import Button from './Button.vue';
 
-const { locale, t } = useI18n();
+const { t } = useI18n();
 
 const props = defineProps({
     agents: {
@@ -34,11 +34,15 @@ onMounted(async () => {
     selectedImage.value.src = selectedImageSrc
     notSelectedImage.value.src = notSelectedImageSrc;
 
-    await loadAgents();
+    await loadAgentImages();
     currentAgent.value = props.agents.find(agent => agent.selected) || props.agents[0] || null;
+
+    props.agents.forEach(agent => {
+        agent.selected = true;
+    });
 });
 
-async function loadAgents() {
+async function loadAgentImages() {
     props.agents.forEach((agent) => {
         const img = new Image();
         img.src = agent.fullPortrait;
@@ -124,10 +128,6 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
         groups[key].push(agent);
         return groups;
     }, {} as GroupedAgents);
-});
-
-watch(locale, () => {
-    loadAgents();
 });
 
 </script>

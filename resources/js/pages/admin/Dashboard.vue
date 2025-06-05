@@ -130,7 +130,7 @@
                             <template #pre>
                                 <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
                             </template>
-                            {{ t('Delete') }}
+                            <span class="text-xs text-primary">{{ t('Delete') }}</span>
                         </Button>
                     </div>
                 </template>

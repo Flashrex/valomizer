@@ -1,6 +1,6 @@
 <template>
     <div class="mb-2 flex w-full items-center justify-between">
-        <h2 class="text-lg font-bold">{{ name }}</h2>
+        <h2 class="text-lg font-bold">{{ t(name) ?? name }}</h2>
         <div class="flex items-center gap-2">
             <label for="search">{{ t('Search:') }}</label>
             <input id="search" type="text" class="rounded border p-1"
@@ -27,7 +27,7 @@
                     @click="column.sortable && $emit('sort', column.value)"
                     :style="{ cursor: column.sortable ? 'pointer' : 'default' }"
                 >
-                    {{ column.label }}
+                    {{ t(column.label) ?? column.label }}
                     <span v-if="column.sortable" class="ml-1 text-xs text-muted-foreground">
                         {{ column.value === sortedBy ? (sortOrder === 'asc' ? '↑' : '↓') : '' }}
                     </span>
@@ -60,13 +60,11 @@
 
     <div class="flex w-full items-center justify-between p-2 bg-card rounded-lg">
         <div class="text-xs">
-            {{ t('Showing') }}
-            <span>{{ (page - 1) * perPage + 1 }}</span>
-            {{ t('to') }}
-            <span>{{ Math.min(page * perPage, total) }}</span>
-            {{ t('of') }}
-            <span>{{ total }}</span>
-            {{ t('entries') }}
+            {{ t('Showing x to y of z entries', {
+                from: (page - 1) * perPage + 1,
+                to: Math.min(page * perPage, total),
+                total: total,
+            }) }}
         </div>
         <div v-if="showPagination" class="flex">
             <button v-if="totalPages > 1 && page > 1"

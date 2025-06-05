@@ -9,8 +9,12 @@ import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 import Notification from './components/Notification.vue';
 
-import de from './locales/de.json';
-import en from './locales/en.json';
+import deDE from './locales/de-DE.json';
+import enUS from './locales/en-US.json';
+import esES from './locales/es-ES.json';
+import fiFI from './locales/fi-FI.json';
+import frFR from './locales/fr-FR.json';
+import itIT from './locales/it-IT.json';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -29,11 +33,15 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 const i18n = createI18n({
     legacy: false,
-    locale: 'en',
-    fallbackLocale: 'en',
+    locale: 'us',
+    fallbackLocale: 'de',
     messages: {
-        en: en,
-        de: de,
+        de: deDE,
+        us: enUS,
+        es: esES,
+        fi: fiFI,
+        fr: frFR,
+        it: itIT
     },
 });
 

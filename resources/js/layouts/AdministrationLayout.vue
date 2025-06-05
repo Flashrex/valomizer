@@ -1,4 +1,5 @@
 <template>
+    <Language />
     <Notification />
     <div class="flex">
         <main class="w-full">
@@ -8,5 +9,6 @@
 </template>
 
 <script lang="ts" setup>
+import Language from '@/components/Language.vue';
 import Notification from '@/components/Notification.vue';
 </script>
