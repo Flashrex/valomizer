@@ -25,11 +25,30 @@ export interface Agent {
     uuid: string;
     active: boolean;
     displayName: string;
+    description: string;
+    developerName: string;
+    releaseDate: string | null;
+    displayIcon: string;
     displayIconSmall: string;
+    bustPortrait: string;
+    fullPortrait: string;
+    fullPortraitV2: string;
+    killfeedPortrait: string;
+    background: string;
+    backgroundGradientColors: string[];
+    assetPath: string;
+    isFullPortraitRightFacing: boolean;
     isPlayableCharacter: boolean;
     created_at: string;
     updated_at: string;
-    role: { displayName: string };
+    role: { 
+        uuid: string;
+        displayName: string;
+        description: string;
+        displayIcon: string | null;
+        assetPath: string | null;
+    };
+    selected: boolean | null;
 }
 
 export interface Map {

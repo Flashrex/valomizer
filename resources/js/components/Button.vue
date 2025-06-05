@@ -6,6 +6,7 @@
             'bg-secondary hover:bg-secondary-accent': color === 'secondary',
             'bg-destructive hover:bg-destructive-accent': color === 'danger',
             'bg-success hover:bg-success-accent': color === 'success',
+            'bg-valorant hover:bg-valorant-accent': color === 'valorant',
         }"
     >
         <slot name="pre" />

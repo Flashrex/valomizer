@@ -1,6 +1,6 @@
 <template>
     <Head title="Dashboard" />
-    <div class="mx-auto w-[60vw]">
+    <div class="mx-auto w-[90vw] md:w-[60vw]">
         <section id="cards" class="p-4">
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card class="flex items-center justify-between gap-4">
@@ -370,4 +370,5 @@ function deleteMap(mapId: number) {
 import { useNotifications } from '@/composables/useNotification';
 import AdministrationLayout from '@/layouts/AdministrationLayout.vue';
 const notify = useNotifications();
+
 </script>

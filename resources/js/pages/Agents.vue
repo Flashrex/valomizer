@@ -1,20 +1,20 @@
 <template>
     <Head title="Agents" />
-    <div>
-        <h2 class="text-primary mb-4 text-2xl font-semibold">Welcome to Agents</h2>
-        <p class="text-primary mb-4 font-semibold">This is the agents content.</p>
+    <div class="w-full h-full flex items-center justify-center overflow-hidden">
+        <AgentCarousel :agents="props.agents" />
     </div>
 </template>
 
 <script setup lang="ts">
+import AgentCarousel from '@/components/AgentCarousel.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { Agent } from '@/types';
 import { Head } from '@inertiajs/vue3';
 
-const props = defineProps({ agents: Array<object> });
+const props = defineProps({ agents: Array<Agent> });
 
 defineOptions({
     layout: AppLayout,
 });
 
-console.log('Agents props:', props.agents);
 </script>
