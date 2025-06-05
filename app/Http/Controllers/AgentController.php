@@ -9,7 +9,7 @@ class AgentController extends Controller
 {
     public function index(Request $request) {
         return inertia('Agents', [
-            'agents' => Agent::all(),
+            'agents' => Agent::where('active', true)->get(),
         ]);
     }
 
