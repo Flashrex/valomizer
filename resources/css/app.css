@@ -210,7 +210,7 @@
 
 @font-face {
     font-family: 'ValorantFont';
-    src: url('@/resources/fonts/ValorantFont.tff') format('tff');
+    src: url('@font/ValorantFont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

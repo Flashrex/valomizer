@@ -4,20 +4,20 @@
         <ul class="flex flex-col items-center justify-center gap-8">
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'agents' }">
                 <Link href="/" class="flex flex-col items-center justify-center">
-                    <img :src="AgentIcon" alt="agent icon" class="inverted h-8 w-8" />
-                    <span>{{ t('Agents') }}</span>
+                    <img :src="AgentIcon" alt="agent icon" class="inverted h-12 w-12" />
+                    <span class="text-xs">{{ t('Agents') }}</span>
                 </Link>
             </li>
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'maps' }">
                 <Link href="maps" class="flex flex-col items-center justify-center">
-                    <img :src="MapIcon" alt="maps icon" class="inverted h-8 w-8" />
-                    <span>{{ t('Maps') }}</span>
+                    <img :src="MapIcon" alt="maps icon" class="inverted h-12 w-12" />
+                    <span class="text-xs">{{ t('Maps') }}</span>
                 </Link>
             </li>
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'about' }">
                 <Link href="about" class="flex flex-col items-center justify-center">
-                    <img :src="AboutIcon" alt="about icon" class="inverted h-8 w-8" />
-                    <span>{{ t('About') }}</span>
+                    <img :src="AboutIcon" alt="about icon" class="inverted h-12 w-12" />
+                    <span class="text-xs">{{ t('About') }}</span>
                 </Link>
             </li>
         </ul>

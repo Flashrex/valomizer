@@ -151,7 +151,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                 >
             </span>
 
-            <h2 class="valorant-font">{{ currentAgent.displayName }}</h2>
+            <h2 class="valorant-font text-2xl text-foreground">{{ currentAgent.displayName }}</h2>
             <div class="flex items-center justify-center gap-2">
                 <img class="w-4" :src="currentAgent.role?.displayIcon ?? ''" :alt="currentAgent.role?.displayName">
                 <p>{{ currentAgent.role?.displayName }}</p>
