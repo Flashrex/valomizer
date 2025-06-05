@@ -205,3 +205,14 @@
 .inverted {
     filter: invert(1);
 }
+
+@font-face {
+    font-family: 'ValorantFont';
+    src: url('@/resources/fonts/ValorantFont.tff') format('tff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.valorant-font {
+    font-family: 'ValorantFont', sans-serif;
+}
