@@ -12,7 +12,7 @@ class StartupCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:startup-command';
+    protected $signature = 'valomizer:startup';
 
     /**
      * The console command description.

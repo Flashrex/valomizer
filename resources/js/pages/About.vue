@@ -28,7 +28,7 @@
             <h1 class="text-2xl font-bold">{{ t('Contribute') }}</h1>
             <p class="text-sm">
                 {{ t('If you want to contribute to this project, you can find the source code on') }}
-                <a class="link text-valorant" href="https://github.com/Flashrex/valorant_randomizer" target="_blank" rel="noopener noreferrer">GitHub</a>.
+                <a class="link text-valorant" href="https://github.com/Flashrex/valomizer" target="_blank" rel="noopener noreferrer">GitHub</a>.
             </p>
         </section>
 
