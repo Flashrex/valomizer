@@ -369,9 +369,6 @@ watch(optionExcludeMaps, () => {
                         class="pointer-events-none bg-accent text-white text-center px-2 py-1 rounded-md absolute z-10 bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity mb-1 min-w-max">
                         {{ map.selected ? "Click to disable" : "Click to enable" }}
                     </span>
-                    <!-- <span class="hidden w-[120px] bg-black text-white text-center p-1 rounded absolute bottom-full left-1/2 -translate-x-1/2 tooltip z-10 transition-opacity duration-300 ease-in-out">
-                            {{ map.selected ? "Click to disable" : "Click to enable" }}
-                    </span> -->
                 </div>
                 <Errors v-if="errors" :errors="errors" />
             </div>
