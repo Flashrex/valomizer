@@ -22,7 +22,7 @@ class AdminController extends Controller
         if (!$startup) {
             $startup = Statistics::create([
                 'key' => 'startup',
-                'value' => now()->format('d-m-Y H:i:s'),
+                'value' => now(),
             ]);
         }
 
@@ -32,9 +32,9 @@ class AdminController extends Controller
             'visits' => Visits::count(),
             'uptime' => $startup->value,
             'agentCount' => Agent::count(),
-            'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->updated_at ?? now()->format('d-m-Y H:i:s'),
+            'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->updated_at->format('d-m-Y H:i:s') ?? now()->format('d-m-Y H:i:s'),
             'mapCount' => Map::count(),
-            'fetchedMaps' => Statistics::where('key', 'fetched_maps')->first()?->updated_at ?? now()->format('d-m-Y H:i:s'),
+            'fetchedMaps' => Statistics::where('key', 'fetched_maps')->first()?->updated_at->format('d-m-Y H:i:s') ?? now()->format('d-m-Y H:i:s'),
         ]);
     }
 

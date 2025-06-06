@@ -187,7 +187,6 @@ const props = defineProps<{
 
 const uptime = computed(() => {
     //Uptime is a string as carbon date datetime:Y-m-d H:i:s
-
     const uptimeDate = new Date(props.uptime);
     const now = new Date();
     const diff = now.getTime() - uptimeDate.getTime();
