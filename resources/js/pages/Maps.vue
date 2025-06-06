@@ -16,6 +16,4 @@ const props = defineProps({ maps: Array<Map> });
 defineOptions({
     layout: AppLayout,
 });
-
-console.log('Maps props:', props.maps);
 </script>
