@@ -33,8 +33,8 @@ class StartupCommand extends Command
             ['comment' => '']
         );
 
-        $this->call('valomizer:fetch-agents');
-        $this->call('valomizer:fetch-maps');
+        $this->call(FetchAgentsCommand::class);
+        $this->call(FetchMapsCommand::class);
 
         $this->info('Startup command executed successfully.');
     }
