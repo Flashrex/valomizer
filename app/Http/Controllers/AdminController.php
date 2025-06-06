@@ -18,15 +18,23 @@ class AdminController extends Controller
 {
     public function index() {
         
+        $startup = Statistics::where('key', 'startup')->first();
+        if (!$startup) {
+            $startup = Statistics::create([
+                'key' => 'startup',
+                'value' => now()->format('d-m-Y H:i:s'),
+            ]);
+        }
+
         return Inertia::render('admin/Dashboard', [
             'agents' => Agent::all(),
             'maps' => Map::all(),
             'visits' => Visits::count(),
-            'uptime' => Statistics::where('key', 'boot_time')->first()?->value ?? now()->format('d-m-Y H:i:s'),
+            'uptime' => $startup->value,
             'agentCount' => Agent::count(),
-            'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->fetched_agents ?? now()->format('d-m-Y H:i:s'),
+            'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->updated_at ?? now()->format('d-m-Y H:i:s'),
             'mapCount' => Map::count(),
-            'fetchedMaps' => Statistics::where('key', 'fetched_maps')->first()?->fetched_maps ?? now()->format('d-m-Y H:i:s'),
+            'fetchedMaps' => Statistics::where('key', 'fetched_maps')->first()?->updated_at ?? now()->format('d-m-Y H:i:s'),
         ]);
     }
 

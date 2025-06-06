@@ -166,7 +166,7 @@ import timerIcon from '@/assets/icons/timer.svg';
 
 import deleteIcon from '@/assets/icons/delete.svg';
 import { useForm } from '@inertiajs/vue3';
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { filterSortPaginate } from '@/util';
 const { t } = useI18n();
 
