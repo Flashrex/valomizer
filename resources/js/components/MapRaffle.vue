@@ -115,7 +115,7 @@ const resetMaps = (maps: Map[]) => {
 
     maps.forEach((map, index) => {
 
-        map.current = index === Math.floor(data.value.cardCount / 2);
+        map.current = index === Math.floor((data.value.cardCount-1) / 2);
         map.key = generateKey();
         map.left = data.value.gap * index + (data.value.width * index);
 
@@ -302,13 +302,13 @@ const updateDimensions = () => {
 
     let reloadMaps = false;
 
-    const newCardCount = window.innerWidth < 1024 ? 3 : 5;
+    const newCardCount = window.innerWidth < 1024 ? 4 : data.value.cardCount;
     if (data.value.cardCount !== newCardCount) {
         data.value.cardCount = newCardCount;
         reloadMaps = true;
     }
 
-    data.value.containerWidth = (data.value.width * data.value.cardCount) + (data.value.gap * (data.value.cardCount - 1));
+    data.value.containerWidth = (data.value.width * (data.value.cardCount-1)) + (data.value.gap * (data.value.cardCount -2 ));
 
     return reloadMaps;
 }
@@ -326,7 +326,11 @@ watch(optionExcludeMaps, () => {
 
 <template>
     <div class="w-[90%] relative rounded-md gap-2 p-2 flex flex-col justify-center items-center">
-        <div v-if="!isLoading" class="relative m-4 h-[40vh] flex flex-col justify-center items-center overflow-hidden" :style="{ width: `${data.containerWidth}px` }">
+        <div 
+            v-if="!isLoading" 
+            class="relative m-4 h-[40vh] flex flex-col justify-center items-center overflow-hidden" 
+            :style="{ width: `${data.containerWidth}px` }"
+        >
             <div class="absolute left-0 top-[5%] h-[90%] transition-transform duration-500 ease-in-out">
                 <div 
                     v-for="map in mapItems" 
@@ -343,7 +347,7 @@ watch(optionExcludeMaps, () => {
                             @click="onSpin"
                             color="valorant"
                         >
-                                {{ t('Spin') }}
+                                <span class="mx-4">{{ t('Spin') }}</span>
                         </Button>
                     </transition>
                 </div>

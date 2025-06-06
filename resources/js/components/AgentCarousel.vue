@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Agent } from '@/types';
-import { computed, onMounted, ref, watch, type ComputedRef } from 'vue';
+import { computed, onMounted, ref, type ComputedRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import selectedImageSrc from '@/assets/icons/selected.png';
