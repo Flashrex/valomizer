@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\FetchAgentsCommand;
+use App\Console\Commands\FetchMapsCommand;
 use App\Models\Agent;
 use App\Models\Map;
 use App\Models\Statistics;
 use App\Models\User;
 use App\Models\Visits;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -47,5 +50,15 @@ class AdminController extends Controller
         Auth::login($user);
 
         return redirect()->route('admin.dashboard');
+    }
+
+    public function fetchAgents() {
+        Artisan::call(FetchAgentsCommand::class);
+        return response()->json(['message' => 'Fetched Agents successfully!']);
+    }
+
+    public function fetchMaps() {
+        Artisan::call(FetchMapsCommand::class);
+        return response()->json(['message' => 'Fetched Maps successfully!']);
     }
 }

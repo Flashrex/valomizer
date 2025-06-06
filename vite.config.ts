@@ -10,7 +10,7 @@ const appUrl = process.env.APP_URL || 'https://localhost';
 const host = new URL(appUrl).hostname;
 const appEnv = process.env.APP_ENV || 'local';
 
-export default defineConfig({
+const config: any = {
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],
@@ -34,17 +34,17 @@ export default defineConfig({
             '@font': path.resolve(__dirname, './resources/fonts'),
         },
     },
-    server: { 
-        host, 
-        hmr: { host }, 
-        ...(appEnv !== 'local'
-            ? {
-                https: {
-                    key: fs.readFileSync(`${process.env.HOME}/.ssl/privkey.pem`),
-                    cert: fs.readFileSync(`${process.env.HOME}/.ssl/fullchain.pem`),
-                }
-            }
-            : {}
-        ),
-    },
-});
+};
+
+if (appEnv !== 'local') {
+    config.server = {
+        host,
+        hmr: { host },
+        https: {
+            key: fs.readFileSync(`${process.env.HOME}/.ssl/privkey.pem`),
+            cert: fs.readFileSync(`${process.env.HOME}/.ssl/fullchain.pem`),
+        },
+    };
+}
+
+export default defineConfig(config);

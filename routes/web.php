@@ -27,6 +27,9 @@ Route::get('admin', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/authenticate', [AdminController::class, 'authenticate'])->name('admin.authenticate');
 Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('auth');
 
+Route::post('admin/fetch-agents', [AdminController::class, 'fetchAgents'])->name('admin.fetch.agents')->middleware('auth');
+Route::post('admin/fetch-maps', [AdminController::class, 'fetchMaps'])->name('admin.fetch.maps')->middleware('auth');
+
 
 /****** ****** ****** ****** ****** Other ****** ****** ****** ****** ******/
 Route::get('about', function () {

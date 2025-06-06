@@ -1,6 +1,9 @@
 <template>
     <div class="mb-2 flex w-full items-center justify-between">
-        <h2 class="text-lg font-bold">{{ t(name) ?? name }}</h2>
+        <div class="flex items-center gap-2">
+            <h2 class="text-lg font-bold">{{ t(name) ?? name }}</h2>
+            <slot name="header"></slot>
+        </div>
         <div class="flex items-center gap-2">
             <label for="search">{{ t('Search:') }}</label>
             <input id="search" type="text" class="rounded border p-1"

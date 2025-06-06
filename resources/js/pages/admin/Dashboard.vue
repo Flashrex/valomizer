@@ -54,6 +54,12 @@
                     agentData.sortOrder = agentData.sortOrder === 'asc' ? 'desc' : 'asc';
                 }"
             >
+                <template #header>
+                    <Button @click="runFetchAgentsCommand" color="valorant">
+                        <span>Fetch</span>
+                    </Button>
+                </template>
+
                 <template #col-displayIconSmall="{ row }">
                     <img :src="row.displayIconSmall" :alt="row.displayName" class="inline-block h-8 w-8" />
                 </template>
@@ -101,6 +107,12 @@
                     mapData.sortOrder = mapData.sortOrder === 'asc' ? 'desc' : 'asc';
                 }"
             >
+                <template #header>
+                    <Button @click="runFetchMapsCommand" color="valorant">
+                        <span>Fetch</span>
+                    </Button>
+                </template>
+
                 <template #col-displayIcon="{ row }">
                     <img :src="row.displayIcon" :alt="row.displayName" class="inline-block h-8 w-8" />
                 </template>
@@ -247,7 +259,7 @@ function toggleAgent(agent: Agent) {
         active: !agent.active,
     });
 
-    form.patch(route('agent.update', agent.id), {
+    form.patch(route('agent.update', agent._id), {
         preserveScroll: true,
         onSuccess: () => {
             notify.info(t('Agent status updated successfully!'));
@@ -271,6 +283,19 @@ function deleteAgent(agentId: number) {
             },
         });
     }
+}
+
+function runFetchAgentsCommand() {
+    const form = useForm({});
+    form.post(route('admin.fetch.agents'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            notify.info(t('Fetch agents command executed successfully!'));
+        },
+        onError: (errors) => {
+            notify.error(t('Failed to execute fetch agents command: {errors}', { errors: Object.values(errors).join(', ') }));
+        },
+    });
 }
 
 
@@ -318,7 +343,7 @@ const toggleMap = (map: Map) => {
         active: !map.active,
     });
 
-    form.patch(route('map.update', map.id), {
+    form.patch(route('map.update', map._id), {
         preserveScroll: true,
         onSuccess: () => {
             notify.info(t('Map status updated successfully!'));
@@ -341,7 +366,7 @@ function updateGamemode(event: Event, map: Map) {
         gamemode: gamemode,
     });
 
-    form.patch(route('map.update', map.id), {
+    form.patch(route('map.update', map._id), {
         preserveScroll: true,
         onSuccess: () => {
             notify.info(t('Gamemode updated successfully!'));
@@ -365,6 +390,19 @@ function deleteMap(mapId: number) {
             },
         });
     }
+}
+
+function runFetchMapsCommand() {
+    const form = useForm({});
+    form.post(route('admin.fetch.maps'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            notify.info(t('Fetch maps command executed successfully!'));
+        },
+        onError: (errors) => {
+            notify.error(t('Failed to execute fetch maps command: {errors}', { errors: Object.values(errors).join(', ') }));
+        },
+    });
 }
 
 import { useNotifications } from '@/composables/useNotification';
