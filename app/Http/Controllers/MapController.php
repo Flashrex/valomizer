@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MapController extends Controller
 {
     public function index() {
-        $maps = Map::all(); // TODO: Return only active maps
+        $maps = Map::where('active', true)->get();
 
         return inertia('Maps', [
             'maps' => $maps,

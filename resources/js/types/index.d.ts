@@ -21,7 +21,7 @@ export interface PaginatedResponse<T> {
 }
 
 export interface Agent {
-    id: number;
+    _id: number;
     uuid: string;
     active: boolean;
     displayName: string;
@@ -52,12 +52,40 @@ export interface Agent {
 }
 
 export interface Map {
-    id: number;
+    _id: number;
     uuid: string;
     active: boolean;
     displayName: string;
-    gamemode: string;
+    narrativeDescription: string;
+    tacticalDescription: string;
+    coordinates: string;
     displayIcon: string;
+    listViewIcon: string;
+    listViewIconTall: string;
+    splash: string;
+    stylizedBackgroundImage: string;
+    assetPath: string;
+    mapUrl: string;
+    xMultiplier: number;
+    yMultiplier: number;
+    xScalarToAdd: number;
+    yScalarToAdd: number;
+    callouts: [
+        {
+            regionName: string;
+            superRegionName: string;
+            location: {
+                x: number;
+                y: number;
+            };
+        }
+    ]
+    gamemode: string;
     created_at: string;
     updated_at: string;
+    selected: boolean | null;
+    current: boolean | null;
+    key: string | null;
+    left: number | null;
+    hidden: boolean | null;
 }

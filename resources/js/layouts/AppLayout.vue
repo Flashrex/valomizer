@@ -3,7 +3,7 @@
     <Notification />
     <div class="flex">
         <Sidebar />
-        <main class="w-full">
+        <main class="w-full overflow-hidden">
             <slot />
         </main>
     </div>
