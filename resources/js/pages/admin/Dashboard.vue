@@ -218,13 +218,13 @@ const agentData = ref({
     sortBy: 'displayName',
     sortOrder: 'asc',
     columns: [
-        { label: 'DisplayName', value: 'displayName', align: 'left' as 'left'| 'center' | 'right', sortable: true },
-        { label: 'Role', value: 'role.displayName', align: 'left' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Icon', value: 'displayIconSmall', align: 'center' as 'left'| 'center' | 'right'},
-        { label: 'Active', value: 'active', align: 'center' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Last Updated', value: 'updated_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Created At', value: 'created_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Actions', value: 'actions', align: 'center' as 'left'| 'center' | 'right'}
+        { label: 'DisplayName', value: 'displayName', sortable: true },
+        { label: 'Role', value: 'role.displayName', sortable: true},
+        { label: 'Icon', value: 'displayIconSmall'},
+        { label: 'Active', value: 'active', sortable: true},
+        { label: 'Last Updated', value: 'updated_at', sortable: true},
+        { label: 'Created At', value: 'created_at', sortable: true},
+        { label: 'Actions', value: 'actions' }
     ],
 });
 
@@ -283,13 +283,13 @@ const mapData = ref({
     sortBy: 'displayName',
     sortOrder: 'asc',
     columns: [
-        { label: 'DisplayName', value: 'displayName', align: 'left' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Gamemode', value: 'gamemode', align: 'center' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Icon', value: 'displayIcon', align: 'center' as 'left'| 'center' | 'right'},
-        { label: 'Active', value: 'active', align: 'center' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Last Updated', value: 'updated_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Created At', value: 'created_at', align: 'left' as 'left'| 'center' | 'right', sortable: true},
-        { label: 'Actions', value: 'actions', align: 'center' as 'left'| 'center' | 'right'}
+        { label: 'DisplayName', value: 'displayName', sortable: true},
+        { label: 'Gamemode', value: 'gamemode', sortable: true},
+        { label: 'Icon', value: 'displayIcon' },
+        { label: 'Active', value: 'active', sortable: true},
+        { label: 'Last Updated', value: 'updated_at', sortable: true},
+        { label: 'Created At', value: 'created_at', sortable: true},
+        { label: 'Actions', value: 'actions' }
     ],
 });
 
