@@ -25,19 +25,27 @@
 </template>
 
 <script lang="ts" setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 
 import AboutIcon from '@/assets/icons/about.svg';
 import AgentIcon from '@/assets/icons/agent.svg';
 import MapIcon from '@/assets/icons/map.svg';
 import ValorantLogo from '@/assets/icons/valorant_logo.svg';
 
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { route } from '../../../vendor/tightenco/ziggy/src/js';
 const { t } = useI18n();
+const page = usePage();
 
 const currentRoute = ref(route().current());
+
+watch(
+  () => page.url, // or page.url if not using .value
+  () => {
+    currentRoute.value = route().current();
+  }
+);
 </script>
 
 <style scoped>
