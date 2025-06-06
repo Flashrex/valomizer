@@ -54,11 +54,11 @@ class AdminController extends Controller
 
     public function fetchAgents() {
         Artisan::call(FetchAgentsCommand::class);
-        return response()->json(['message' => 'Fetched Agents successfully!']);
+        return redirect()->back()->with('success', 'Fetched Agents successfully!');
     }
 
     public function fetchMaps() {
         Artisan::call(FetchMapsCommand::class);
-        return response()->json(['message' => 'Fetched Maps successfully!']);
+        return redirect()->back()->with('success', 'Fetched Agents successfully!');
     }
 }
