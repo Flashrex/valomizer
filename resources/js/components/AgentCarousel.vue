@@ -62,7 +62,6 @@ function rollAgents(duration: number = 5000, speed: number = 10) {
     }
 
     errors.value = [];
-
     const filteredAgents = props.agents.filter(agent => agent.selected);
 
     // Don't roll just select random agent
@@ -72,34 +71,29 @@ function rollAgents(duration: number = 5000, speed: number = 10) {
         return;
     }
 
+    let elapsed = 0;
+    let currentSpeed = speed;
     const decreaseRate = 5;
-    let interval: number | undefined;
+    isRolling = true;
 
+    function animate() {
+        if (elapsed >= duration) {
+            isRolling = false;
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * filteredAgents.length);
+        currentAgent.value = filteredAgents[randomIndex];
 
-    const startInterval = () => {
-        interval = setInterval(() => {
-            isRolling = true;
-            const randomIndex = Math.floor(Math.random() * filteredAgents.length);
-            currentAgent.value = filteredAgents[randomIndex];
+        currentSpeed = Math.min(currentSpeed + decreaseRate, 1000); // Cap at 1000ms
+        elapsed += currentSpeed;
 
-            // Decrease speed
-            speed += decreaseRate;
+        setTimeout(animate, currentSpeed);
+    }
 
-            // Clear interval
-            clearInterval(interval);
+    animate();
 
-            // Start new interval with decreased speed
-            if (speed <= 1000) { // Maximum speed
-                startInterval();
-            }
-        }, speed);
-    };
-
-    // Start the interval
-    startInterval();
     setTimeout(() => {
         isRolling = false;
-        clearInterval(interval);
     }, duration);
 };
 
@@ -159,7 +153,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
 
             <Errors v-if="errors" :errors="errors" />
 
-            <Button class="w-4/5" color="valorant" @click="rollAgents()">{{ t("Spin") }}</Button>
+            <Button class="w-4/5" color="valorant" :disabled="isRolling" @click="rollAgents()">{{ t("Spin") }}</Button>
             <div class="flex gap-2 items-center justify-center">
                 <label>{{ t('Skip Animation') }}</label>
                 <img 
@@ -195,6 +189,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                             class="ml-2"
                             color="valorant" 
                             @click="selectGroup(roleName.toString())"
+                            :disabled="isRolling"
                         >
                             {{ t('Select Group') }}
                         </Button>
@@ -224,8 +219,8 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
 
             <div class="w-full flex justify-center">
                 <div class="flex gap-4">
-                    <Button color="valorant" @click="selectAllAgents()">{{ t('Select All') }}</Button>
-                    <Button color="valorant" @click="selectAllAgents(false)">{{ t('De-select All') }}</Button>
+                    <Button color="valorant" :disabled="isRolling" @click="selectAllAgents()">{{ t('Select All') }}</Button>
+                    <Button color="valorant" :disabled="isRolling" @click="selectAllAgents(false)">{{ t('De-select All') }}</Button>
                 </div>
             </div>
         </div>
