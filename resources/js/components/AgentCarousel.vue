@@ -172,7 +172,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                 <Button color="valorant" :disabled="isRolling" @click="selectAllAgents()">{{ t('Select All') }}</Button>
             </div>
 
-            <div v-for="(group, roleName, idx) in groupedAgents" :key="roleName" class="mb-4 flex flex-col items-start justify-center gap-2">
+            <div v-for="(group, roleName) in groupedAgents" :key="roleName" class="mb-4 flex flex-col items-start justify-center gap-2">
                 <!-- ****** ****** ****** ****** ****** ****** Header ****** ****** ****** ****** ****** ****** -->
                 <div class="flex items-center">
                     <h3>{{ roleName }}</h3>

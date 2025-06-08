@@ -122,7 +122,7 @@ const resetMaps = (maps: Map[]) => {
 };
 
 /** Selection */
-const onSpin = (e: MouseEvent) => {
+const onSpin = () => {
     if (!mapItems.value) return;
 
     if (!props.maps.some((map) => map.selected)) {
@@ -148,7 +148,7 @@ const onSpin = (e: MouseEvent) => {
         if (deltaTime > fpsInterval) {
             lastTime = timestamp - (deltaTime % fpsInterval);
 
-            mapItems.value?.forEach((map, index) => {
+            mapItems.value?.forEach((map) => {
                 if (update(map, ending, moveSpeed)) finished = true;
             });
 
