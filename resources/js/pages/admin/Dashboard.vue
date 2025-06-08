@@ -5,7 +5,9 @@
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
-                        <p class="font-bold">{{ t('Visits') }} <span class="text-xs">(24 {{ t('Hours') }})</span></p>
+                        <p class="font-bold">
+                            {{ t('Visits') }} <span class="text-xs">(24 {{ t('Hours') }})</span>
+                        </p>
                         <h2 class="text-valorant text-xl font-bold">{{ visits.lastTwentyFourHours }}</h2>
                         <span class="text-xs">Total: {{ visits.total }}</span>
                     </div>
