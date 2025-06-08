@@ -9,7 +9,7 @@
             <input
                 id="search"
                 type="text"
-                class="rounded border p-1 focus:ring-valorant focus:ring-2 focus:outline-none bg-accent dark:bg-card"
+                class="focus:ring-valorant bg-accent dark:bg-card rounded border p-1 focus:ring-2 focus:outline-none"
                 :placeholder="search.length > 0 ? search.join(', ') : t('Search')"
                 @input="$emit('search', ($event.target as HTMLInputElement).value)"
             />
