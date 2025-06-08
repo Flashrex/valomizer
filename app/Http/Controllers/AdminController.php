@@ -30,7 +30,7 @@ class AdminController extends Controller
             'agents' => Agent::all(),
             'maps' => Map::all(),
             'visits' => Visits::count(),
-            'uptime' => $startup->value,
+            'uptime' => $startup->updated_at->diffForHumans(),
             'agentCount' => Agent::count(),
             'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->updated_at->format('d-m-Y H:i:s') ?? now()->format('d-m-Y H:i:s'),
             'mapCount' => Map::count(),

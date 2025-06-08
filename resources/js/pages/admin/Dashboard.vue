@@ -185,41 +185,6 @@ const props = defineProps<{
     fetchedMaps: string;
 }>();
 
-const uptime = computed(() => {
-    //Uptime is a string as carbon date datetime:Y-m-d H:i:s
-    const uptimeDate = new Date(props.uptime);
-    const now = new Date();
-    const diff = now.getTime() - uptimeDate.getTime();
-
-    const seconds = Math.floor(diff / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(months / 12);
-
-    let uptimeString = '';
-    if (years > 0) {
-        uptimeString += `${years} ${t('y', { count: years })} `;
-    }
-    if (months > 0) {
-        uptimeString += `${months % 12} ${t('m', { count: months % 12 })} `;
-    }
-    if (days > 0) {
-        uptimeString += `${days % 30} ${t('d', { count: days % 30 })} `;
-    }
-    if (hours > 0) {
-        uptimeString += `${hours % 24} ${t('h', { count: hours % 24 })} `;
-    }
-    if (minutes > 0) {
-        uptimeString += `${minutes % 60} ${t('m', { count: minutes % 60 })} `;
-    }
-    if (seconds > 0) {
-        uptimeString += `${seconds % 60} ${t('s', { count: seconds % 60 })}`;
-    }
-    return uptimeString.trim() || t('just now');
-});
-
 /****** ****** ****** ****** ****** ****** Agents ****** ****** ****** ****** ****** ******/
 
 const agentData = ref({
