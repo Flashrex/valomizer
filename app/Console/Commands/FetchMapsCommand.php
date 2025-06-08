@@ -58,10 +58,17 @@ class FetchMapsCommand extends Command
             $progressBar->advance();
         }
 
-        Statistics::updateOrCreate(
-            ['key' => 'fetched_maps'],
-            ['comment' => "Fetched {$newMaps} new maps and updated {$updatedMaps} existing maps."]
-        );
+        $statistics = Statistics::where('key', 'fetched_maps')->first();
+        if ($statistics) {
+            $statistics->touch();
+            $statistics->save();
+        } else {
+            Statistics::create([
+                'key' => 'fetched_maps',
+                'comment' => "Fetched {$newMaps} new maps and updated {$updatedMaps} existing maps."
+            ]);
+        }
+
 
         $progressBar->finish();
         $this->info("\nAll maps have been processed successfully.");

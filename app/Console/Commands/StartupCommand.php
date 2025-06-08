@@ -28,10 +28,17 @@ class StartupCommand extends Command
     {
         $this->info('Executing startup command...');
 
-        Statistics::updateOrCreate(
-            ['key' => 'startup'],
-            ['comment' => '']
-        );
+        $startup = Statistics::where('key', 'startup')->first();
+
+        if(!$startup) {
+            Statistics::create([
+                'key' => 'startup',
+                'comment' => 'Started Application'
+            ]);
+        } else {
+            $startup->touch();
+            $startup->save();
+        }
 
         $this->call(FetchAgentsCommand::class);
         $this->call(FetchMapsCommand::class);

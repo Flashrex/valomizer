@@ -58,11 +58,17 @@ class FetchAgentsCommand extends Command
             $progressBar->advance();
         }
 
-        Statistics::updateOrCreate(
-            ['key' => 'fetched_agents'],
-            ['comment' => "Fetched {$newAgents} new agents and updated {$updatedAgents} existing agents."]
-        );
-
+        $statistics = Statistics::where('key', 'fetched_agents')->first();
+        if ($statistics) {
+            $statistics->touch();
+            $statistics->save();
+        } else {
+            Statistics::create([
+                'key' => 'fetched_agents',
+                'comment' => "Fetched {$newAgents} new agents and updated {$updatedAgents} existing agents."
+            ]);
+        }
+        
         $progressBar->finish();
 
         $this->info("\nAll agents have been processed successfully.");
