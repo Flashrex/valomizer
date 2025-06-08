@@ -5,21 +5,22 @@
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
-                        <p>{{ t('Total Visits') }}</p>
-                        <h2 class="text-valorant text-xl font-bold">{{ visits }}</h2>
+                        <p class="font-bold">{{ t('Visits') }} <span class="text-xs">(24 {{ t('Hours') }})</span></p>
+                        <h2 class="text-valorant text-xl font-bold">{{ visits.lastTwentyFourHours }}</h2>
+                        <span class="text-xs">Total: {{ visits.total }}</span>
                     </div>
                     <img :src="eyeIcon" alt="visits icon" class="h-16 w-16" />
                 </Card>
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
-                        <p>{{ t('Uptime') }}</p>
+                        <p class="font-bold">{{ t('Server started') }}</p>
                         <h2 class="text-valorant text-xl font-bold">{{ uptime }}</h2>
                     </div>
                     <img :src="timerIcon" alt="uptime icon" class="h-16 w-16" />
                 </Card>
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
-                        <p>{{ t('Agents') }}</p>
+                        <p class="font-bold">{{ t('Agents') }}</p>
                         <h2 class="text-valorant text-xl font-bold">{{ agents.length }}</h2>
                         <span class="text-xs">Last updated: {{ fetchedAgents }}</span>
                     </div>
@@ -27,7 +28,7 @@
                 </Card>
                 <Card class="flex items-center justify-between gap-4">
                     <div class="flex flex-col items-start">
-                        <p>{{ t('Maps') }}</p>
+                        <p class="font-bold">{{ t('Maps') }}</p>
                         <h2 class="text-valorant text-xl font-bold">{{ maps.length }}</h2>
                         <span class="text-xs">Last updated: {{ fetchedMaps }}</span>
                     </div>
@@ -167,10 +168,15 @@ defineOptions({
     layout: AdministrationLayout,
 });
 
+type Visits = {
+    total: number;
+    lastTwentyFourHours: number;
+};
+
 const props = defineProps<{
     agents: Array<Agent>;
     maps: Array<Map>;
-    visits: number;
+    visits: Visits;
     uptime: string;
     totalAgents: number;
     fetchedAgents: string;

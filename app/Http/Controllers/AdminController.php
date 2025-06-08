@@ -27,10 +27,15 @@ class AdminController extends Controller
             ]);
         }
 
+        $visitsLastTwentyFourHours = Visits::where('created_at', '>=', now()->subDay())->count();
+
         return Inertia::render('admin/Dashboard', [
             'agents' => Agent::all(),
             'maps' => Map::all(),
-            'visits' => Visits::count(),
+            'visits' => [
+                'lastTwentyFourHours' => $visitsLastTwentyFourHours,
+                'total' => Visits::count(),
+            ],
             'uptime' => $startup->updated_at->diffForHumans(),
             'totalAgents' => Agent::where('active', true)->count(),
             'fetchedAgents' => Statistics::where('key', 'fetched_agents')->first()?->updated_at->format('d-m-Y H:i:s') ?? now()->format('d-m-Y H:i:s'),
