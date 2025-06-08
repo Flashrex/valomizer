@@ -7,7 +7,7 @@
         }"
     >
         <img 
-            :src="ValorantLogo" alt="valorant logo" class="mb-4 h-12 w-12 hidden md:block" 
+            :src="ValorantLogo" alt="valorant logo" class="mt-2 mb-4 h-8 w-8 hidden md:block" 
         />
         <ul 
             class="flex items-center gap-8 flex-col justify-center"
