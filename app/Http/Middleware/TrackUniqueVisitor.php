@@ -26,6 +26,17 @@ class TrackUniqueVisitor
         }
 
         if (!Visits::where('identifier', $visitorId)->exists()) {
+            
+            // Check if the user agent is in the ignored list/if it is a bot
+            $userAgent = $request->userAgent();
+            $ignoredUserAgents = Visits::getIgnoredUserAgents();
+            
+            foreach ($ignoredUserAgents as $bot) {
+                if ($userAgent && stripos($userAgent, $bot) !== false) {
+                    return $next($request);
+                }
+            }
+            
             Visits::create([
                 'identifier' => $visitorId,
                 'ip' => $request->ip(),
