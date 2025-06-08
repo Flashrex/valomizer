@@ -11,19 +11,19 @@
             <img :src="MenuIcon" alt="menu icon" class="mt-4 block h-8 w-8 cursor-pointer invert md:hidden" @click="toggleSidebar" />
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'agents' }">
                 <Link href="/" class="flex flex-col items-center justify-center">
-                    <img :src="AgentIcon" alt="agent icon" class="invert-0 dark:invert h-8 w-8 md:h-12 md:w-12" />
+                    <img :src="AgentIcon" alt="agent icon" class="h-8 w-8 invert-0 md:h-12 md:w-12 dark:invert" />
                     <span class="text-xs">{{ t('Agents') }}</span>
                 </Link>
             </li>
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'maps' }">
                 <Link href="maps" class="flex flex-col items-center justify-center">
-                    <img :src="MapIcon" alt="maps icon" class="invert-0 dark:invert h-8 w-8 md:h-12 md:w-12" />
+                    <img :src="MapIcon" alt="maps icon" class="h-8 w-8 invert-0 md:h-12 md:w-12 dark:invert" />
                     <span class="text-xs">{{ t('Maps') }}</span>
                 </Link>
             </li>
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'about' }">
                 <Link href="about" class="flex flex-col items-center justify-center">
-                    <img :src="AboutIcon" alt="about icon" class="invert-0 dark:invert h-8 w-8 md:h-12 md:w-12" />
+                    <img :src="AboutIcon" alt="about icon" class="h-8 w-8 invert-0 md:h-12 md:w-12 dark:invert" />
                     <span class="text-xs">{{ t('About') }}</span>
                 </Link>
             </li>

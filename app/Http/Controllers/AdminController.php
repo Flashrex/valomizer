@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-
 class AdminController extends Controller
 {
     public function index()
@@ -29,6 +28,7 @@ class AdminController extends Controller
         }
 
         $uniqueVisits = Visits::getUnique(now()->subDay());
+
         return Inertia::render('admin/Dashboard', [
             'agents' => Agent::all(),
             'maps' => Map::all(),

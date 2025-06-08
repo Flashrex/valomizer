@@ -41,7 +41,6 @@ const data = ref({
 
 /** Initialization */
 onMounted(async () => {
-
     await loadMaps();
 
     updateDimensions();
@@ -359,9 +358,9 @@ watch(optionExcludeMaps, () => {
                     :class="map.selected ? 'bg-valorant' : 'bg-muted'"
                     @click="mapSelect(map)"
                 >
-                    <p class="text-sm text-background dark:text-foreground">{{ map.displayName }}</p>
+                    <p class="text-background dark:text-foreground text-sm">{{ map.displayName }}</p>
                     <span
-                        class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                        class="bg-accent text-foreground pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center opacity-0 transition-opacity group-hover:opacity-100"
                     >
                         {{ map.selected ? 'Click to disable' : 'Click to enable' }}
                     </span>

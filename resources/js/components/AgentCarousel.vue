@@ -29,7 +29,6 @@ const noAnimation = ref(false);
 const errors = ref<string[]>([]);
 
 onMounted(async () => {
-
     await loadAgentImages();
     currentAgent.value = props.agents.find((agent) => agent.selected) || props.agents[0] || null;
 
@@ -193,7 +192,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                             @click="agentSelect(agent)"
                         />
                         <span
-                            class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                            class="bg-accent text-foreground pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center opacity-0 transition-opacity group-hover:opacity-100"
                         >
                             {{ agent.selected ? 'Click to disable' : 'Click to enable' }}
                         </span>

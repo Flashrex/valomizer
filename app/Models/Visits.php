@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use MongoDB\BSON\UTCDateTime;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Eloquent\SoftDeletes;
-use MongoDB\BSON\UTCDateTime;
 
 class Visits extends Model
 {
@@ -44,7 +44,8 @@ class Visits extends Model
     /**
      *  Get unique visits since a given date.
      */
-    public static function getUnique(Carbon $since) : Collection {
+    public static function getUnique(Carbon $since): Collection
+    {
         return Visits::raw(function ($collection) use ($since) {
             return $collection->aggregate([
                 [
