@@ -101,6 +101,29 @@ This is a fanmade Valorant application and is not in any way associated with Val
 
 ---
 
+## Contribution & Merge Rules
+
+Before pushing or merging to the `main` branch, **you must**:
+
+1. **Run PHP code style fixer:**
+    ```sh
+    ./vendor/bin/sail pint
+    ```
+
+2. **Format frontend code:**
+    ```sh
+    ./vendor/bin/sail npm run format
+    ```
+
+3. **Run frontend linter:**
+    ```sh
+    ./vendor/bin/sail npm run lint
+    ```
+
+Only merge if all checks pass and your code is properly formatted and linted.
+
+---
+
 ## Notes
 
 - This project is not affiliated with or endorsed by Riot Games.
