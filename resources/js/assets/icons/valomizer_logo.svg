@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg baseProfile="tiny" height="210" version="1.2" width="233" xmlns="http://www.w3.org/2000/svg">
+  <g transform="matrix(1, 0, 0, 1, -65.000003, -407.000018)">
+    <path fill="#FF4655" d="M 206 407 L 186 442 L 241.106 441.833 L 161 569 L 190 617 L 250 562 L 207 562 L 295 411 L 296 410 L 296 409 L 298 407 L 206 407 Z" style="transform-box: fill-box; transform-origin: 50% 50%;"/>
+    <polygon fill="#FF4655" points="65 407 154 556 172 526 102 407" style="transform-box: fill-box; transform-origin: 50% 50%;"/>
+  </g>
+</svg>

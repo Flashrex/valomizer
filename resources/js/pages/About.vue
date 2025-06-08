@@ -1,7 +1,7 @@
 <template>
     <Head title="About" />
-    <div class="text-primary flex h-full w-full flex-col items-center justify-start gap-8 mt-8">
-        <section class="flex flex-col items-center justify-center p-4">
+    <div class="text-primary flex w-full flex-col items-center justify-start gap-8 mt-16 md:mt-8">
+        <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('About this website') }}</h1>
             <p class="text-sm">{{ t('This website is a tool for finding a random map or agent to play with.') }}</p>
             <br />
@@ -11,7 +11,7 @@
             </p>
         </section>
 
-        <section class="flex flex-col items-center justify-center p-4">
+        <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('Disclaimer') }}</h1>
             <p class="text-sm">{{ t('Valorant is a registered trademark of') }} <a class="link text-valorant" href="https://www.riotgames.com" target="_blank" rel="noopener noreferrer">Riot Games, Inc</a>.</p>
             <p class="text-sm">
@@ -19,12 +19,12 @@
             </p>
         </section>
 
-        <section class="flex flex-col items-center justify-center p-4">
+        <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('Privacy Policy') }}</h1>
             <p class="text-sm">{{ t('This website does not collect any personal data.') }}</p>
         </section>
 
-        <section class="flex flex-col items-center justify-center p-4">
+        <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('Contribute') }}</h1>
             <p class="text-sm">
                 {{ t('If you want to contribute to this project, you can find the source code on') }}
@@ -32,7 +32,7 @@
             </p>
         </section>
 
-        <section class="flex flex-col items-center justify-center p-4">
+        <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('Buy me a coffee') }}</h1>
             <p class="text-sm">{{ t('If you like this project and want to support me, consider buying me a coffee.') }}</p>
             <a href="https://ko-fi.com/I2I115AQ06" target="_blank">
@@ -46,7 +46,7 @@
             </a>
         </section>
 
-        <section class="flex flex-col items-center justify-center p-4">
+        <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('Contact') }}</h1>
             <p class="text-sm">
                 {{ t('If you have any questions or suggestions, feel free to contact me at') }}

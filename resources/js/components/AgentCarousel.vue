@@ -123,16 +123,14 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
         return groups;
     }, {} as GroupedAgents);
 });
-
 </script>
 
 <template>
-    <div class="m-4 relative flex items-center gap-8 p-2 overflow-hidden">
-
+    <div class="m-4 relative flex flex-col md:flex-row items-center gap-8 p-2">
 
         <!-- ****** ****** ****** ****** ****** ****** Current Agent Display ****** ****** ****** ****** ****** ****** -->
-        <Card v-if="currentAgent" class="w-[20vw] flex flex-col items-center justify-center gap-2">
-            <span class="relative bg-transparent w-full h-[40vh] flex items-center justify-center">
+        <Card v-if="currentAgent" class="w-[80vw] md:w-[20vw] flex flex-col items-center justify-center gap-2">
+            <span class="relative bg-transparent w-full h-[25vh] md:h-[40vh] flex items-center justify-center">
                 <img 
                     class="absolute top-0 left-0 w-full h-full opacity-25 z-10 invert" 
                     :src="currentAgent.background"
@@ -175,9 +173,15 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
         </Card>
 
         <!-- ****** ****** ****** ****** ****** ****** Agent Selector ****** ****** ****** ****** ****** ****** -->
-        <div class="flex flex-col overflow-auto overflow-x-hidden items-start">
+        <div 
+            class="flex flex-col items-start overflow-y-auto h-[25vh] md:h-auto overflow-x-hidden"
+        >
+            <div class="w-full flex justify-start mb-4">
+                <Button color="valorant" :disabled="isRolling" @click="selectAllAgents()">{{ t('Select All') }}</Button>
+            </div>
+
             <div 
-                v-for="(group, roleName) in groupedAgents" 
+                v-for="(group, roleName, idx) in groupedAgents" 
                 :key="roleName"
                 class="flex justify-center items-start flex-col gap-2 mb-4"
             >
@@ -200,7 +204,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                 <div class="flex flex-wrap gap-2">
                     <div v-for="agent in group" :key="agent.uuid" class="relative group">
                         <img 
-                            class="w-12" 
+                            class="w-12 cursor-pointer" 
                             :class="{
                                 'grayscale-0': agent.selected,
                                 'grayscale': !agent.selected,
@@ -214,13 +218,6 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                             {{ agent.selected ? "Click to disable" : "Click to enable" }}
                         </span>
                     </div>
-                </div>
-            </div>
-
-            <div class="w-full flex justify-center">
-                <div class="flex gap-4">
-                    <Button color="valorant" :disabled="isRolling" @click="selectAllAgents()">{{ t('Select All') }}</Button>
-                    <Button color="valorant" :disabled="isRolling" @click="selectAllAgents(false)">{{ t('De-select All') }}</Button>
                 </div>
             </div>
         </div>

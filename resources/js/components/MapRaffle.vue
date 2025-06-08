@@ -326,9 +326,11 @@ watch(optionExcludeMaps, () => {
 
 <template>
     <div class="w-[90%] relative rounded-md gap-2 p-2 flex flex-col justify-center items-center">
+        
+        <!-- ****** ****** ****** ****** ****** ****** Raffle ****** ****** ****** ****** ****** ****** -->
         <div 
             v-if="!isLoading" 
-            class="relative m-4 h-[40vh] flex flex-col justify-center items-center overflow-hidden" 
+            class="relative m-4 h-[40vh] flex flex-col justify-center items-center overflow-hidden mt-12 md:mt-4" 
             :style="{ width: `${data.containerWidth}px` }"
         >
             <div class="absolute left-0 top-[5%] h-[90%] transition-transform duration-500 ease-in-out">
@@ -355,8 +357,8 @@ watch(optionExcludeMaps, () => {
             </div>
         </div>
 
-
-        <div class="w-1/2 m-4 flex flex-col justify-center items-center gap-4">
+        <!-- ****** ****** ****** ****** ****** ****** Maps Selection ****** ****** ****** ****** ****** ****** -->
+        <div class="w-full md:w-1/2 m-4 flex flex-col justify-center items-center gap-4">
             <div class="flex flex-wrap justify-center items-center gap-2">
                 <div 
                     v-for="map in maps" :key="map.key ?? map.uuid" 
@@ -376,7 +378,7 @@ watch(optionExcludeMaps, () => {
                 <Button color="valorant" :disabled="spinning" @click="selectAll">{{ t('Select All') }}</Button>
                 <Button color="valorant" :disabled="spinning" @click="deselectAll">{{ t('De-select All') }}</Button>
             </div>
-            <div class="flex cursor-pointer" @click="optionExcludeMaps = !optionExcludeMaps">
+            <div class="flex items-center cursor-pointer text-xs md:text-base" @click="optionExcludeMaps = !optionExcludeMaps">
                 <img v-if="optionExcludeMaps" class="w-6 h-6" :src="selectedImage.src" alt="selected">
                 <img v-else class="w-6 h-6" :src="notSelectedImage.src" alt="not_selected">
                 <label>{{ t('Exclude rolled map from future rolls') }}</label>
