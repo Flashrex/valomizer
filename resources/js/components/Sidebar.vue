@@ -6,7 +6,7 @@
             '-translate-x-full': !active,
         }"
     >
-        <img :src="ValorantLogo" alt="valorant logo" class="mt-2 mb-4 hidden h-8 w-8 md:block" />
+        <img :src="ValomizerLogo" alt="valomizer logo" class="mt-2 mb-4 hidden h-8 w-8 md:block" />
         <ul class="flex flex-col items-center justify-center gap-8">
             <img :src="MenuIcon" alt="valorant logo" class="mt-4 block h-8 w-8 cursor-pointer invert md:hidden" @click="toggleSidebar" />
             <li class="flex items-center justify-center" :class="{ active: currentRoute === 'agents' }">
@@ -28,7 +28,7 @@
                 </Link>
             </li>
         </ul>
-        <img :src="ValorantLogo" alt="valorant logo" class="block h-8 w-8 md:hidden" />
+        <img :src="ValomizerLogo" alt="valomizer logo" class="block h-8 w-8 md:hidden" />
     </nav>
 </template>
 
@@ -39,7 +39,7 @@ import AboutIcon from '@/assets/icons/about.svg';
 import AgentIcon from '@/assets/icons/agent.svg';
 import MapIcon from '@/assets/icons/map.svg';
 import MenuIcon from '@/assets/icons/menu.svg';
-import ValorantLogo from '@/assets/icons/valomizer_logo.svg';
+import ValomizerLogo from '@/assets/icons/valomizer_logo.svg';
 
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
