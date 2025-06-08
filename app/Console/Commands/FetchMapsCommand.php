@@ -32,10 +32,11 @@ class FetchMapsCommand extends Command
 
         if (empty($maps)) {
             $this->info('No maps found or API request failed.');
+
             return;
         }
 
-        $this->info("Found " . count($maps) . " maps. Processing...");
+        $this->info('Found '.count($maps).' maps. Processing...');
         $progressBar = $this->output->createProgressBar(count($maps));
         $progressBar->start();
 
@@ -65,10 +66,9 @@ class FetchMapsCommand extends Command
         } else {
             Statistics::create([
                 'key' => 'fetched_maps',
-                'comment' => "Fetched {$newMaps} new maps and updated {$updatedMaps} existing maps."
+                'comment' => "Fetched {$newMaps} new maps and updated {$updatedMaps} existing maps.",
             ]);
         }
-
 
         $progressBar->finish();
         $this->info("\nAll maps have been processed successfully.");

@@ -1,6 +1,6 @@
 <template>
     <Head title="About" />
-    <div class="text-primary flex w-full flex-col items-center justify-start gap-8 mt-16 md:mt-8">
+    <div class="text-primary mt-16 flex w-full flex-col items-center justify-start gap-8 md:mt-8">
         <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('About this website') }}</h1>
             <p class="text-sm">{{ t('This website is a tool for finding a random map or agent to play with.') }}</p>
@@ -13,7 +13,10 @@
 
         <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('Disclaimer') }}</h1>
-            <p class="text-sm">{{ t('Valorant is a registered trademark of') }} <a class="link text-valorant" href="https://www.riotgames.com" target="_blank" rel="noopener noreferrer">Riot Games, Inc</a>.</p>
+            <p class="text-sm">
+                {{ t('Valorant is a registered trademark of') }}
+                <a class="link text-valorant" href="https://www.riotgames.com" target="_blank" rel="noopener noreferrer">Riot Games, Inc</a>.
+            </p>
             <p class="text-sm">
                 {{ t('Riot Games, Inc. does not endorse or sponsor this project.') }}
             </p>

@@ -41,7 +41,7 @@ export interface Agent {
     isPlayableCharacter: boolean;
     created_at: string;
     updated_at: string;
-    role: { 
+    role: {
         uuid: string;
         displayName: string;
         description: string;
@@ -78,8 +78,8 @@ export interface Map {
                 x: number;
                 y: number;
             };
-        }
-    ]
+        },
+    ];
     gamemode: string;
     created_at: string;
     updated_at: string;

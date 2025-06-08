@@ -1,4 +1,4 @@
-import { ref, readonly } from 'vue';
+import { readonly, ref } from 'vue';
 
 type NotificationType = 'info' | 'warning' | 'error';
 
@@ -15,7 +15,7 @@ function showNotification(message: string, type: NotificationType = 'info', time
     const notification = { id: ++id, message, type };
     notifications.value.push(notification);
     setTimeout(() => {
-        notifications.value = notifications.value.filter(t => t.id !== notification.id);
+        notifications.value = notifications.value.filter((t) => t.id !== notification.id);
     }, timeout);
 }
 
@@ -26,7 +26,7 @@ export function useNotifications() {
         warning: (msg: string, timeout?: number) => showNotification(msg, 'warning', timeout),
         error: (msg: string, timeout?: number) => showNotification(msg, 'error', timeout),
         dismiss: (id: number) => {
-            notifications.value = notifications.value.filter(notification => notification.id !== id);
-        }
+            notifications.value = notifications.value.filter((notification) => notification.id !== id);
+        },
     };
 }

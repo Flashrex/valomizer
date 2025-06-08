@@ -35,7 +35,7 @@ class Agent extends Model
         'role',
         'recruitmentData',
         'abilities',
-        'voiceLine'
+        'voiceLine',
     ];
 
     protected $casts = [

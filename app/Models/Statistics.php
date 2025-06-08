@@ -13,7 +13,7 @@ class Statistics extends Model
 
     protected $fillable = [
         'key',
-        'comment'
+        'comment',
     ];
 
     protected $casts = [

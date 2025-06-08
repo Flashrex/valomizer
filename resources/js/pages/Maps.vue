@@ -1,7 +1,7 @@
 <template>
     <Head title="Maps" />
-    <div class="m-4 relative flex justify-center items-center gap-8 p-2 overflow-hidden">
-        <MapRaffle :maps="props.maps" ></MapRaffle>
+    <div class="relative m-4 flex items-center justify-center gap-8 overflow-hidden p-2">
+        <MapRaffle :maps="props.maps"></MapRaffle>
     </div>
 </template>
 

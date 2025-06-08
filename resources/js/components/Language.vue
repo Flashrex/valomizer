@@ -39,29 +39,31 @@ onMounted(() => {
         }
     });
 });
-
 </script>
 
 <template>
     <div
-        class="language-selector fixed top-4 right-4 z-50 flex justify-center items-center cursor-pointer rounded-full p-2 hover:bg-card"
+        class="language-selector hover:bg-card fixed top-4 right-4 z-50 flex cursor-pointer items-center justify-center rounded-full p-2"
         :class="{ 'bg-card': menuVisible }"
         @click="toggleMenu"
     >
-        <img class="w-6 aspect-square brightness-75" src="../assets/icons/translate.svg" alt="translate icon">
+        <img class="aspect-square w-6 brightness-75" src="../assets/icons/translate.svg" alt="translate icon" />
     </div>
 
     <transition name="fade">
-        <div class="fixed top-16 right-4 z-50 bg-card rounded-md shadow-lg transition-opacity transition-transform duration-500 ease-in-out" v-if="menuVisible">
-            <ul class="list-none p-0 m-0">
-                <li 
-                    v-for="(language, code) in languages" 
-                    :key="code" 
-                    class="p-2 cursor:pointer hover:bg-muted flex items-center gap-2"
+        <div
+            class="bg-card fixed top-16 right-4 z-50 rounded-md shadow-lg transition-opacity transition-transform duration-500 ease-in-out"
+            v-if="menuVisible"
+        >
+            <ul class="m-0 list-none p-0">
+                <li
+                    v-for="(language, code) in languages"
+                    :key="code"
+                    class="cursor:pointer hover:bg-muted flex items-center gap-2 p-2"
                     :class="[code === locale ? `selected` : ``]"
                     @click="selectLanguage(code)"
                 >
-                    <span class="fi" :class="`fi-${code}`"></span> 
+                    <span class="fi" :class="`fi-${code}`"></span>
                     <span>{{ language }}</span>
                 </li>
             </ul>
@@ -70,8 +72,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
-
 .active {
     background-color: var(--color-background-soft);
 }
@@ -82,7 +82,9 @@ onMounted(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 .fade-enter,

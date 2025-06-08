@@ -31,7 +31,7 @@ class Map extends Model
         'yScalarToAdd',
         'callouts',
         'gamemode',
-        'active'
+        'active',
     ];
 
     protected $casts = [

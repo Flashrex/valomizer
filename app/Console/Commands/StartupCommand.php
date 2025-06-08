@@ -30,10 +30,10 @@ class StartupCommand extends Command
 
         $startup = Statistics::where('key', 'startup')->first();
 
-        if(!$startup) {
+        if (! $startup) {
             Statistics::create([
                 'key' => 'startup',
-                'comment' => 'Started Application'
+                'comment' => 'Started Application',
             ]);
         } else {
             $startup->touch();

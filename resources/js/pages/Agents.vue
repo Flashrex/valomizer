@@ -1,6 +1,6 @@
 <template>
     <Head title="Agents" />
-    <div class="w-full flex items-start mt-16 justify-center overflow-hidden">
+    <div class="mt-16 flex w-full items-start justify-center overflow-hidden">
         <AgentCarousel :agents="props.agents" />
     </div>
 </template>
@@ -16,5 +16,4 @@ const props = defineProps({ agents: Array<Agent> });
 defineOptions({
     layout: AppLayout,
 });
-
 </script>

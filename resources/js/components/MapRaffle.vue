@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
-import type { Map } from '@/types';
 import Errors from '@/components/Error.vue';
-import Button from './Button.vue';
+import type { Map } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
+import { onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import Button from './Button.vue';
 const { t } = useI18n();
 
-import selectedImageSrc from '@/assets/icons/selected.png';
 import notSelectedImageSrc from '@/assets/icons/not_selected.png';
+import selectedImageSrc from '@/assets/icons/selected.png';
 
 const props = defineProps({
     maps: {
         type: Array as () => Map[],
-        default: () => []
-    }
+        default: () => [],
+    },
 });
 
 const errors = ref<string[]>([]);
@@ -29,8 +29,8 @@ const isButtonVisible = ref<boolean>(true);
 const selectedImage = ref(new Image());
 const notSelectedImage = ref(new Image());
 
-var optionExcludeMaps = ref<boolean>(JSON.parse(localStorage.getItem("optionExcludeMaps") || "false"));
-var usedMaps = JSON.parse(localStorage.getItem("usedMaps") || "[]");
+const optionExcludeMaps = ref<boolean>(JSON.parse(localStorage.getItem('optionExcludeMaps') || 'false'));
+let usedMaps = JSON.parse(localStorage.getItem('usedMaps') || '[]');
 
 const data = ref({
     cardCount: 6,
@@ -40,11 +40,11 @@ const data = ref({
     transitionDuration: 5000, //ms
     maxMoveSpeed: 50, //px
     minMoveSpeed: 2.5, //px
-})
+});
 
 /** Initialization */
 onMounted(async () => {
-    selectedImage.value.src = selectedImageSrc
+    selectedImage.value.src = selectedImageSrc;
     notSelectedImage.value.src = notSelectedImageSrc;
 
     await loadMaps();
@@ -56,11 +56,10 @@ onMounted(async () => {
         if (spinning.value) return;
         if (updateDimensions()) addMapItems();
     });
-})
+});
 
 async function loadMaps() {
-
-    props.maps.forEach(map => {
+    props.maps.forEach((map) => {
         map.selected = optionExcludeMaps.value ? !usedMaps.includes(map.displayName) : true;
         map.current = false;
     });
@@ -88,7 +87,7 @@ const addMapItems = () => {
     if (props.maps.length === 0) return;
     mapItems.value = [];
 
-    const activeMaps = props.maps.filter(map => map.selected);
+    const activeMaps = props.maps.filter((map) => map.selected);
     let cards = [] as Map[];
 
     if (activeMaps.length === 0) {
@@ -108,26 +107,25 @@ const addMapItems = () => {
     resetMaps(cards);
 
     mapItems.value = [...cards];
-}
+};
 
 const resetMaps = (maps: Map[]) => {
     if (!maps) return;
 
     maps.forEach((map, index) => {
-
-        map.current = index === Math.floor((data.value.cardCount-1) / 2);
+        map.current = index === Math.floor((data.value.cardCount - 1) / 2);
         map.key = generateKey();
-        map.left = data.value.gap * index + (data.value.width * index);
+        map.left = data.value.gap * index + data.value.width * index;
 
         map.hidden = false;
     });
-}
+};
 
 /** Selection */
 const onSpin = (e: MouseEvent) => {
     if (!mapItems.value) return;
 
-    if (!props.maps.some(map => map.selected)) {
+    if (!props.maps.some((map) => map.selected)) {
         errors.value = ['Please select at least one map.'];
         return;
     }
@@ -154,7 +152,7 @@ const onSpin = (e: MouseEvent) => {
                 if (update(map, ending, moveSpeed)) finished = true;
             });
 
-            mapItems.value = mapItems.value.filter(map => !map.hidden);
+            mapItems.value = mapItems.value.filter((map) => !map.hidden);
 
             if (!ending) {
                 if (moveSpeed < data.value.maxMoveSpeed) moveSpeed += 0.1;
@@ -186,16 +184,16 @@ const update = (map: Map, ending: boolean, moveSpeed: number): boolean => {
             if (optionExcludeMaps.value) {
                 if (!usedMaps.includes(map.displayName)) {
                     usedMaps.push(map.displayName);
-                    localStorage.setItem("usedMaps", JSON.stringify(usedMaps));
+                    localStorage.setItem('usedMaps', JSON.stringify(usedMaps));
                 }
 
-                const mapRef = props.maps.find(m => m.displayName === map.displayName);
+                const mapRef = props.maps.find((m) => m.displayName === map.displayName);
                 if (mapRef) mapRef.selected = false;
             }
 
             isButtonVisible.value = true;
 
-            const activeMaps = mapItems.value?.filter(m => !m.hidden).sort((a, b) => (a.left ?? 0) - (b.left ?? 0));
+            const activeMaps = mapItems.value?.filter((m) => !m.hidden).sort((a, b) => (a.left ?? 0) - (b.left ?? 0));
             resetMaps(activeMaps);
 
             return true;
@@ -214,27 +212,27 @@ const update = (map: Map, ending: boolean, moveSpeed: number): boolean => {
         addMap(nextMap());
     }
     return false;
-}
+};
 
 const mapSelect = (map: Map) => {
     if (spinning.value) return;
     map.selected = !map.selected;
     if (optionExcludeMaps.value) {
-        usedMaps = props.maps.filter(map => !map.selected).map(map => map.displayName);
-        localStorage.setItem("usedMaps", JSON.stringify(usedMaps));
+        usedMaps = props.maps.filter((map) => !map.selected).map((map) => map.displayName);
+        localStorage.setItem('usedMaps', JSON.stringify(usedMaps));
     }
-}
+};
 
 const isInCenterArea = (map: Map) => {
     if (!map.left) return false;
 
     const cardMid = map.left + data.value.width / 2;
 
-    const min = (data.value.containerWidth / 2) - (data.value.width / 2);
-    const max = (data.value.containerWidth / 2) + (data.value.width / 2);
+    const min = data.value.containerWidth / 2 - data.value.width / 2;
+    const max = data.value.containerWidth / 2 + data.value.width / 2;
 
     return cardMid > min && cardMid < max;
-}
+};
 
 const isCentered = (map: Map) => {
     if (!map.left) return false;
@@ -245,27 +243,27 @@ const isCentered = (map: Map) => {
     const max = data.value.containerWidth / 2 + 10;
 
     return cardMid >= min && cardMid <= max;
-}
+};
 
 const highestX = () => {
     const itemWithHighestLeft = mapItems.value.reduce((highest, item) => {
-        return ((highest.left ?? 0) > (item.left ?? 0)) ? highest : item;
+        return (highest.left ?? 0) > (item.left ?? 0) ? highest : item;
     });
 
     return itemWithHighestLeft.left ?? 0;
-}
+};
 
 const nextMap = () => {
-    const activeMaps = props.maps.filter(map => map.selected);
+    const activeMaps = props.maps.filter((map) => map.selected);
     return { ...activeMaps[Math.floor(Math.random() * activeMaps.length)] };
-}
+};
 
 const hideMap = (map: Map) => {
     if (!mapItems.value) return;
 
     map.left = -data.value.width;
     map.hidden = true;
-}
+};
 
 const addMap = (next: Map) => {
     if (next) {
@@ -274,32 +272,31 @@ const addMap = (next: Map) => {
         next.hidden = false;
         mapItems.value = [...mapItems.value, next];
     }
-}
+};
 
 const selectAll = () => {
     if (spinning.value) return;
-    props.maps.forEach(map => map.selected = true);
+    props.maps.forEach((map) => (map.selected = true));
     if (optionExcludeMaps.value) {
         usedMaps = [];
-        localStorage.setItem("usedMaps", JSON.stringify(usedMaps));
+        localStorage.setItem('usedMaps', JSON.stringify(usedMaps));
     }
-}
+};
 
 const deselectAll = () => {
     if (spinning.value) return;
-    props.maps.forEach(map => map.selected = false);
+    props.maps.forEach((map) => (map.selected = false));
     if (optionExcludeMaps.value) {
-        usedMaps = props.maps.map(map => map.displayName);
-        localStorage.setItem("usedMaps", JSON.stringify(usedMaps));
+        usedMaps = props.maps.map((map) => map.displayName);
+        localStorage.setItem('usedMaps', JSON.stringify(usedMaps));
     }
-}
+};
 
 const generateKey = () => {
     return uuidv4();
-}
+};
 
 const updateDimensions = () => {
-
     let reloadMaps = false;
 
     const newCardCount = window.innerWidth < 1024 ? 4 : data.value.cardCount;
@@ -308,85 +305,85 @@ const updateDimensions = () => {
         reloadMaps = true;
     }
 
-    data.value.containerWidth = (data.value.width * (data.value.cardCount-1)) + (data.value.gap * (data.value.cardCount -2 ));
+    data.value.containerWidth = data.value.width * (data.value.cardCount - 1) + data.value.gap * (data.value.cardCount - 2);
 
     return reloadMaps;
-}
+};
 
 watch(optionExcludeMaps, () => {
     if (optionExcludeMaps.value) {
-        usedMaps = props.maps.filter(map => !map.selected).map(map => map.displayName);
+        usedMaps = props.maps.filter((map) => !map.selected).map((map) => map.displayName);
     } else {
         usedMaps = [];
     }
-    localStorage.setItem("usedMaps", JSON.stringify(usedMaps));
-    localStorage.setItem("optionExcludeMaps", JSON.stringify(optionExcludeMaps.value));
-})
+    localStorage.setItem('usedMaps', JSON.stringify(usedMaps));
+    localStorage.setItem('optionExcludeMaps', JSON.stringify(optionExcludeMaps.value));
+});
 </script>
 
 <template>
-    <div class="w-[90%] relative rounded-md gap-2 p-2 flex flex-col justify-center items-center">
-        
+    <div class="relative flex w-[90%] flex-col items-center justify-center gap-2 rounded-md p-2">
         <!-- ****** ****** ****** ****** ****** ****** Raffle ****** ****** ****** ****** ****** ****** -->
-        <div 
-            v-if="!isLoading" 
-            class="relative m-4 h-[40vh] flex flex-col justify-center items-center overflow-hidden mt-12 md:mt-4" 
+        <div
+            v-if="!isLoading"
+            class="relative m-4 mt-12 flex h-[40vh] flex-col items-center justify-center overflow-hidden md:mt-4"
             :style="{ width: `${data.containerWidth}px` }"
         >
-            <div class="absolute left-0 top-[5%] h-[90%] transition-transform duration-500 ease-in-out">
-                <div 
-                    v-for="map in mapItems" 
-                    class="absolute flex flex-col justify-center items-center h-full rounded-2xl overflow-hidden transition-transform duration-100 ease-in-out" 
+            <div class="absolute top-[5%] left-0 h-[90%] transition-transform duration-500 ease-in-out">
+                <div
+                    v-for="map in mapItems"
+                    class="absolute flex h-full flex-col items-center justify-center overflow-hidden rounded-2xl transition-transform duration-100 ease-in-out"
                     :class="map.current ? '[transform:scale(1.05)]' : ''"
-                    :style="{ width: `${data.width}px`, left: `${map.left}px` }" :key="map.key ?? map.uuid">
-                    <img class="w-full h-full object-cover" :src="map.listViewIconTall">
-                    <p class="m-0 absolute text-valorant text-2xl font-bold top-8 [text-shadow:2px_2px_4px_#fd455774]">{{ map.displayName }}</p>
+                    :style="{ width: `${data.width}px`, left: `${map.left}px` }"
+                    :key="map.key ?? map.uuid"
+                >
+                    <img class="h-full w-full object-cover" :src="map.listViewIconTall" />
+                    <p class="text-valorant absolute top-8 m-0 text-2xl font-bold [text-shadow:2px_2px_4px_#fd455774]">{{ map.displayName }}</p>
                     <transition name="fade">
-                        <Button 
-                            v-if="map.current && isButtonVisible" 
-                            class="absolute mx-auto bottom-8 z-10 flex justify-center items-center"  
+                        <Button
+                            v-if="map.current && isButtonVisible"
+                            class="absolute bottom-8 z-10 mx-auto flex items-center justify-center"
                             ref="spinButton"
                             @click="onSpin"
                             color="valorant"
                         >
-                                <span class="mx-4">{{ t('Spin') }}</span>
+                            <span class="mx-4">{{ t('Spin') }}</span>
                         </Button>
                     </transition>
                 </div>
-
             </div>
         </div>
 
         <!-- ****** ****** ****** ****** ****** ****** Maps Selection ****** ****** ****** ****** ****** ****** -->
-        <div class="w-full md:w-1/2 m-4 flex flex-col justify-center items-center gap-4">
-            <div class="flex flex-wrap justify-center items-center gap-2">
-                <div 
-                    v-for="map in maps" :key="map.key ?? map.uuid" 
-                    class="relative rounded-md px-4 py-0.5 select-none group" 
+        <div class="m-4 flex w-full flex-col items-center justify-center gap-4 md:w-1/2">
+            <div class="flex flex-wrap items-center justify-center gap-2">
+                <div
+                    v-for="map in maps"
+                    :key="map.key ?? map.uuid"
+                    class="group relative rounded-md px-4 py-0.5 select-none"
                     :class="map.selected ? 'bg-valorant' : 'bg-muted'"
                     @click="mapSelect(map)"
                 >
                     <p class="text-sm">{{ map.displayName }}</p>
                     <span
-                        class="pointer-events-none bg-accent text-white text-center px-2 py-1 rounded-md absolute z-10 bottom-full left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity mb-1 min-w-max">
-                        {{ map.selected ? "Click to disable" : "Click to enable" }}
+                        class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-white opacity-0 transition-opacity group-hover:opacity-100"
+                    >
+                        {{ map.selected ? 'Click to disable' : 'Click to enable' }}
                     </span>
                 </div>
                 <Errors v-if="errors" :errors="errors" />
             </div>
-            <div class="flex justify-center items-center gap-4">
+            <div class="flex items-center justify-center gap-4">
                 <Button color="valorant" :disabled="spinning" @click="selectAll">{{ t('Select All') }}</Button>
                 <Button color="valorant" :disabled="spinning" @click="deselectAll">{{ t('De-select All') }}</Button>
             </div>
-            <div class="flex items-center cursor-pointer text-xs md:text-base" @click="optionExcludeMaps = !optionExcludeMaps">
-                <img v-if="optionExcludeMaps" class="w-6 h-6" :src="selectedImage.src" alt="selected">
-                <img v-else class="w-6 h-6" :src="notSelectedImage.src" alt="not_selected">
+            <div class="flex cursor-pointer items-center text-xs md:text-base" @click="optionExcludeMaps = !optionExcludeMaps">
+                <img v-if="optionExcludeMaps" class="h-6 w-6" :src="selectedImage.src" alt="selected" />
+                <img v-else class="h-6 w-6" :src="notSelectedImage.src" alt="not_selected" />
                 <label>{{ t('Exclude rolled map from future rolls') }}</label>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -30,7 +30,7 @@ class Visits extends Model
         'curl',
         'bot',
         'spider',
-        'crawler'
+        'crawler',
     ];
 
     public static function getIgnoredUserAgents(): array

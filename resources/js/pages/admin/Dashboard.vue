@@ -21,7 +21,7 @@
                     <div class="flex flex-col items-start">
                         <p>{{ t('Agents') }}</p>
                         <h2 class="text-valorant text-xl font-bold">{{ agents.length }}</h2>
-                        <span class="text-xs">Last updated: {{ fetchedAgents  }}</span>
+                        <span class="text-xs">Last updated: {{ fetchedAgents }}</span>
                     </div>
                     <img :src="agentIcon" alt="agents icon" class="inverted h-16 w-16" />
                 </Card>
@@ -49,10 +49,12 @@
                 :sort-order="agentData.sortOrder"
                 @update:page="agentData.page = $event"
                 @search="agentData.searchQuery = $event"
-                @sort="(sortBy: string) => {
-                    agentData.sortBy = sortBy;
-                    agentData.sortOrder = agentData.sortOrder === 'asc' ? 'desc' : 'asc';
-                }"
+                @sort="
+                    (sortBy: string) => {
+                        agentData.sortBy = sortBy;
+                        agentData.sortOrder = agentData.sortOrder === 'asc' ? 'desc' : 'asc';
+                    }
+                "
             >
                 <template #header>
                     <Button @click="runFetchAgentsCommand" color="valorant">
@@ -66,14 +68,8 @@
 
                 <template #col-active="{ row }">
                     <form @submit.prevent="toggleAgent(row as Agent)">
-                        <input
-                            type="checkbox"
-                            :checked="row.active"
-                            @change="toggleAgent(row as Agent)"
-                            class="h-4 w-4"
-                        />
+                        <input type="checkbox" :checked="row.active" @change="toggleAgent(row as Agent)" class="h-4 w-4" />
                     </form>
-
                 </template>
 
                 <template #col-actions="{ row }">
@@ -82,7 +78,7 @@
                             <template #pre>
                                 <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
                             </template>
-                            <span class="text-xs text-primary">{{ t('Delete') }}</span>
+                            <span class="text-primary text-xs">{{ t('Delete') }}</span>
                         </Button>
                     </div>
                 </template>
@@ -102,10 +98,12 @@
                 :sort-order="mapData.sortOrder"
                 @update:page="mapData.page = $event"
                 @search="mapData.searchQuery = $event"
-                @sort="(sortBy: string) => {
-                    mapData.sortBy = sortBy;
-                    mapData.sortOrder = mapData.sortOrder === 'asc' ? 'desc' : 'asc';
-                }"
+                @sort="
+                    (sortBy: string) => {
+                        mapData.sortBy = sortBy;
+                        mapData.sortOrder = mapData.sortOrder === 'asc' ? 'desc' : 'asc';
+                    }
+                "
             >
                 <template #header>
                     <Button @click="runFetchMapsCommand" color="valorant">
@@ -119,12 +117,7 @@
 
                 <template #col-active="{ row }">
                     <form @submit.prevent="toggleMap(row as Map)">
-                        <input
-                            type="checkbox"
-                            :checked="row.active"
-                            @change="toggleMap(row as Map)"
-                            class="h-4 w-4"
-                        />
+                        <input type="checkbox" :checked="row.active" @change="toggleMap(row as Map)" class="h-4 w-4" />
                     </form>
                 </template>
 
@@ -142,7 +135,7 @@
                             <template #pre>
                                 <img :src="deleteIcon" alt="delete icon" class="h-4 w-4" />
                             </template>
-                            <span class="text-xs text-primary">{{ t('Delete') }}</span>
+                            <span class="text-primary text-xs">{{ t('Delete') }}</span>
                         </Button>
                     </div>
                 </template>
@@ -156,8 +149,8 @@ import Button from '@/components/Button.vue';
 import Card from '@/components/Card.vue';
 import Table from '@/components/Table.vue';
 import { Agent, Map } from '@/types';
-import { useI18n } from 'vue-i18n';
 import { Head } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 
 import agentIcon from '@/assets/icons/agent.svg';
 import eyeIcon from '@/assets/icons/eye.svg';
@@ -165,9 +158,9 @@ import mapIcon from '@/assets/icons/map.svg';
 import timerIcon from '@/assets/icons/timer.svg';
 
 import deleteIcon from '@/assets/icons/delete.svg';
+import { filterSortPaginate } from '@/util';
 import { useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
-import { filterSortPaginate } from '@/util';
 const { t } = useI18n();
 
 defineOptions({
@@ -195,27 +188,27 @@ const agentData = ref({
     sortOrder: 'asc',
     columns: [
         { label: 'DisplayName', value: 'displayName', sortable: true },
-        { label: 'Role', value: 'role.displayName', sortable: true},
-        { label: 'Icon', value: 'displayIconSmall'},
-        { label: 'Active', value: 'active', sortable: true},
-        { label: 'Last Updated', value: 'updated_at', sortable: true},
-        { label: 'Created At', value: 'created_at', sortable: true},
-        { label: 'Actions', value: 'actions' }
+        { label: 'Role', value: 'role.displayName', sortable: true },
+        { label: 'Icon', value: 'displayIconSmall' },
+        { label: 'Active', value: 'active', sortable: true },
+        { label: 'Last Updated', value: 'updated_at', sortable: true },
+        { label: 'Created At', value: 'created_at', sortable: true },
+        { label: 'Actions', value: 'actions' },
     ],
 });
 
 const filteredAgents = computed(() =>
-  filterSortPaginate(
-    props.agents,
-    {
-        page: agentData.value.page,
-        perPage: agentData.value.perPage,
-        searchQuery: agentData.value.searchQuery,
-        sortBy: agentData.value.sortBy,
-        sortOrder: agentData.value.sortOrder as 'asc' | 'desc',
-    },
-    ['displayName', 'uuid', 'role.displayName']
-  )
+    filterSortPaginate(
+        props.agents,
+        {
+            page: agentData.value.page,
+            perPage: agentData.value.perPage,
+            searchQuery: agentData.value.searchQuery,
+            sortBy: agentData.value.sortBy,
+            sortOrder: agentData.value.sortOrder as 'asc' | 'desc',
+        },
+        ['displayName', 'uuid', 'role.displayName'],
+    ),
 );
 
 function toggleAgent(agent: Agent) {
@@ -262,7 +255,6 @@ function runFetchAgentsCommand() {
     });
 }
 
-
 /****** ****** ****** ****** ****** ****** Maps ****** ****** ****** ****** ****** ******/
 
 const mapData = ref({
@@ -272,13 +264,13 @@ const mapData = ref({
     sortBy: 'displayName',
     sortOrder: 'asc',
     columns: [
-        { label: 'DisplayName', value: 'displayName', sortable: true},
-        { label: 'Gamemode', value: 'gamemode', sortable: true},
+        { label: 'DisplayName', value: 'displayName', sortable: true },
+        { label: 'Gamemode', value: 'gamemode', sortable: true },
         { label: 'Icon', value: 'displayIcon' },
-        { label: 'Active', value: 'active', sortable: true},
-        { label: 'Last Updated', value: 'updated_at', sortable: true},
-        { label: 'Created At', value: 'created_at', sortable: true},
-        { label: 'Actions', value: 'actions' }
+        { label: 'Active', value: 'active', sortable: true },
+        { label: 'Last Updated', value: 'updated_at', sortable: true },
+        { label: 'Created At', value: 'created_at', sortable: true },
+        { label: 'Actions', value: 'actions' },
     ],
 });
 
@@ -289,17 +281,17 @@ const gamemodes = ref([
 ]);
 
 const filteredMaps = computed(() =>
-  filterSortPaginate(
-    props.maps,
-    {
-        page: mapData.value.page,
-        perPage: mapData.value.perPage,
-        searchQuery: mapData.value.searchQuery,
-        sortBy: mapData.value.sortBy,
-        sortOrder: mapData.value.sortOrder as 'asc' | 'desc',
-    },
-    ['displayName', 'uuid', 'gamemode']
-  )
+    filterSortPaginate(
+        props.maps,
+        {
+            page: mapData.value.page,
+            perPage: mapData.value.perPage,
+            searchQuery: mapData.value.searchQuery,
+            sortBy: mapData.value.sortBy,
+            sortOrder: mapData.value.sortOrder as 'asc' | 'desc',
+        },
+        ['displayName', 'uuid', 'gamemode'],
+    ),
 );
 
 const toggleMap = (map: Map) => {
@@ -372,5 +364,4 @@ function runFetchMapsCommand() {
 import { useNotifications } from '@/composables/useNotification';
 import AdministrationLayout from '@/layouts/AdministrationLayout.vue';
 const notify = useNotifications();
-
 </script>

@@ -16,10 +16,11 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
-    public function index() {
-        
+    public function index()
+    {
+
         $startup = Statistics::where('key', 'startup')->first();
-        if (!$startup) {
+        if (! $startup) {
             $startup = Statistics::create([
                 'key' => 'startup',
                 'value' => now(),
@@ -38,17 +39,19 @@ class AdminController extends Controller
         ]);
     }
 
-    public function login() {
+    public function login()
+    {
         return Inertia::render('admin/Login');
     }
 
-    public function authenticate(Request $request) {
-        
+    public function authenticate(Request $request)
+    {
+
         $credentials = $request->only('email', 'password');
 
         $user = User::where('email', strtolower($credentials['email']))->first();
 
-        if (!$user || !password_verify($credentials['password'], $user->password)) {
+        if (! $user || ! password_verify($credentials['password'], $user->password)) {
             return redirect()->back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ]);
@@ -60,13 +63,17 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function fetchAgents() {
+    public function fetchAgents()
+    {
         Artisan::call(FetchAgentsCommand::class);
+
         return redirect()->back()->with('success', 'Fetched Agents successfully!');
     }
 
-    public function fetchMaps() {
+    public function fetchMaps()
+    {
         Artisan::call(FetchMapsCommand::class);
+
         return redirect()->back()->with('success', 'Fetched Agents successfully!');
     }
 }

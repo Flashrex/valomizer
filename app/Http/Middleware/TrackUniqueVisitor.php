@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Visits;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Str;
-use App\Models\Visits;
+use Symfony\Component\HttpFoundation\Response;
 
 class TrackUniqueVisitor
 {
@@ -20,23 +20,23 @@ class TrackUniqueVisitor
         $cookieName = 'visitor_id';
         $visitorId = $request->cookie($cookieName);
 
-        if (!$visitorId) {
+        if (! $visitorId) {
             $visitorId = (string) Str::uuid();
             cookie()->queue(cookie($cookieName, $visitorId, 60 * 24));
         }
 
-        if (!Visits::where('identifier', $visitorId)->exists()) {
-            
+        if (! Visits::where('identifier', $visitorId)->exists()) {
+
             // Check if the user agent is in the ignored list/if it is a bot
             $userAgent = $request->userAgent();
             $ignoredUserAgents = Visits::getIgnoredUserAgents();
-            
+
             foreach ($ignoredUserAgents as $bot) {
                 if ($userAgent && stripos($userAgent, $bot) !== false) {
                     return $next($request);
                 }
             }
-            
+
             Visits::create([
                 'identifier' => $visitorId,
                 'ip' => $request->ip(),

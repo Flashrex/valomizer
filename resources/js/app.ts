@@ -6,8 +6,8 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { ZiggyVue } from 'ziggy-js';
-import { initializeTheme } from './composables/useAppearance';
 import Notification from './components/Notification.vue';
+import { initializeTheme } from './composables/useAppearance';
 
 import deDE from './locales/de-DE.json';
 import enUS from './locales/en-US.json';
@@ -41,7 +41,7 @@ const i18n = createI18n({
         es: esES,
         fi: fiFI,
         fr: frFR,
-        it: itIT
+        it: itIT,
     },
 });
 

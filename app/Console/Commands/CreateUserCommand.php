@@ -26,8 +26,9 @@ class CreateUserCommand extends Command
      */
     public function handle()
     {
-        if(User::where('email', $this->argument('email'))->exists()) {
+        if (User::where('email', $this->argument('email'))->exists()) {
             $this->error('User already exists.');
+
             return 1;
         }
 
@@ -40,6 +41,7 @@ class CreateUserCommand extends Command
         ]);
 
         $this->info('User created successfully.');
+
         return 0;
     }
 }

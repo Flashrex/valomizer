@@ -30,16 +30,16 @@ class FetchAgentsCommand extends Command
     {
         $agents = $api->getAgents();
 
-        if(empty($agents)) {
+        if (empty($agents)) {
             $this->info('No agents found or API request failed.');
+
             return;
         }
 
-        $this->info("Found " . count($agents) . " agents. Processing...");
+        $this->info('Found '.count($agents).' agents. Processing...');
         $progressBar = $this->output->createProgressBar(count($agents));
         $progressBar->start();
-        
-        
+
         $newAgents = 0;
         $updatedAgents = 0;
         foreach ($agents as $agent) {
@@ -65,10 +65,10 @@ class FetchAgentsCommand extends Command
         } else {
             Statistics::create([
                 'key' => 'fetched_agents',
-                'comment' => "Fetched {$newAgents} new agents and updated {$updatedAgents} existing agents."
+                'comment' => "Fetched {$newAgents} new agents and updated {$updatedAgents} existing agents.",
             ]);
         }
-        
+
         $progressBar->finish();
 
         $this->info("\nAll agents have been processed successfully.");

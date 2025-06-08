@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Services;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 
 class ValorantApiService
@@ -12,20 +12,22 @@ class ValorantApiService
     {
         $params = [
             'isPlayableCharacter' => 'true',
-            'language' => 'en-US'
+            'language' => 'en-US',
         ];
 
         $response = Http::get("{$this->baseUrl}/agents", $params);
+
         return $response->json()['data'] ?? [];
     }
 
     public function getMaps()
     {
         $params = [
-            'language' => 'en-US'
+            'language' => 'en-US',
         ];
 
         $response = Http::get("{$this->baseUrl}/maps", $params);
+
         return $response->json()['data'] ?? [];
     }
 }

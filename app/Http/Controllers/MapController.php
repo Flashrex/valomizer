@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $maps = Map::where('active', true)->get();
 
         return inertia('Maps', [
@@ -15,7 +16,8 @@ class MapController extends Controller
         ]);
     }
 
-    public function update(Request $request, Map $map) {
+    public function update(Request $request, Map $map)
+    {
         $validated = $request->validate([
             'uuid' => 'sometimes|string',
             'displayName' => 'sometimes|string',
@@ -40,11 +42,14 @@ class MapController extends Controller
         ]);
 
         $map->update($validated);
+
         return redirect()->back()->with('success', 'Map updated successfully.');
     }
 
-    public function destroy(Map $map) {
+    public function destroy(Map $map)
+    {
         $map->delete();
+
         return redirect()->back()->with('success', 'Map deleted successfully.');
     }
 }

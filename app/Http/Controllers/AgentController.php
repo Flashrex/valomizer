@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return inertia('Agents', [
             'agents' => Agent::where('active', true)->get(),
         ]);
     }
 
-    public function update(Request $request, Agent $agent) {
+    public function update(Request $request, Agent $agent)
+    {
 
         $validated = $request->validate([
             'active' => 'sometimes|boolean',
@@ -42,11 +44,14 @@ class AgentController extends Controller
         ]);
 
         $agent->update($validated);
+
         return redirect()->back()->with('success', 'Agent updated successfully.');
     }
 
-    public function destroy(Agent $agent) {
+    public function destroy(Agent $agent)
+    {
         $agent->delete();
+
         return redirect()->back()->with('success', 'Agent deleted successfully.');
     }
 }
