@@ -60,7 +60,7 @@ onMounted(() => {
                     v-for="(language, code) in languages"
                     :key="code"
                     class="cursor:pointer hover:bg-background flex items-center gap-2 p-2"
-                    :class="[code === locale ? `font-bold` : `bg-card`]"
+                    :class="[code === locale ? `font-bold text-valorant` : `bg-card`]"
                     @click="selectLanguage(code)"
                 >
                     <span class="fi" :class="`fi-${code}`"></span>
