@@ -7,8 +7,8 @@ import { useI18n } from 'vue-i18n';
 import Button from './Button.vue';
 const { t } = useI18n();
 
-import notSelectedImageSrc from '@/assets/icons/not_selected.png';
-import selectedImageSrc from '@/assets/icons/selected.png';
+import notSelectedImage from '@/assets/icons/not_selected.png';
+import selectedImage from '@/assets/icons/selected.png';
 
 const props = defineProps({
     maps: {
@@ -26,9 +26,6 @@ const spinning = ref<boolean>(false);
 const spinButton = ref<HTMLElement>();
 const isButtonVisible = ref<boolean>(true);
 
-const selectedImage = ref(new Image());
-const notSelectedImage = ref(new Image());
-
 const optionExcludeMaps = ref<boolean>(JSON.parse(localStorage.getItem('optionExcludeMaps') || 'false'));
 let usedMaps = JSON.parse(localStorage.getItem('usedMaps') || '[]');
 
@@ -44,8 +41,6 @@ const data = ref({
 
 /** Initialization */
 onMounted(async () => {
-    selectedImage.value.src = selectedImageSrc;
-    notSelectedImage.value.src = notSelectedImageSrc;
 
     await loadMaps();
 
@@ -364,9 +359,9 @@ watch(optionExcludeMaps, () => {
                     :class="map.selected ? 'bg-valorant' : 'bg-muted'"
                     @click="mapSelect(map)"
                 >
-                    <p class="text-sm">{{ map.displayName }}</p>
+                    <p class="text-sm text-background dark:text-foreground">{{ map.displayName }}</p>
                     <span
-                        class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-white opacity-0 transition-opacity group-hover:opacity-100"
+                        class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-foreground opacity-0 transition-opacity group-hover:opacity-100"
                     >
                         {{ map.selected ? 'Click to disable' : 'Click to enable' }}
                     </span>
@@ -378,8 +373,8 @@ watch(optionExcludeMaps, () => {
                 <Button color="valorant" :disabled="spinning" @click="deselectAll">{{ t('De-select All') }}</Button>
             </div>
             <div class="flex cursor-pointer items-center text-xs md:text-base" @click="optionExcludeMaps = !optionExcludeMaps">
-                <img v-if="optionExcludeMaps" class="h-6 w-6" :src="selectedImage.src" alt="selected" />
-                <img v-else class="h-6 w-6" :src="notSelectedImage.src" alt="not_selected" />
+                <img v-if="optionExcludeMaps" class="h-6 w-6 invert dark:invert-0" :src="selectedImage" alt="selected" />
+                <img v-else class="h-6 w-6 invert dark:invert-0" :src="notSelectedImage" alt="not_selected" />
                 <label>{{ t('Exclude rolled map from future rolls') }}</label>
             </div>
         </div>

@@ -67,16 +67,16 @@
             <div v-if="showPagination" class="flex">
                 <button
                     v-if="totalPages > 1 && page > 1"
-                    class="cursor-pointer rounded py-1 text-xs text-white"
+                    class="cursor-pointer rounded py-1 text-xs text-foreground"
                     :disabled="page <= 1"
                     @click="$emit('update:page', page - 1)"
                 >
                     {{ '<' }}
                 </button>
-                <span class="flex items-center justify-center rounded px-2 text-xs text-white"> {{ page }} / {{ totalPages }} </span>
+                <span class="flex items-center justify-center rounded px-2 text-xs text-foreground"> {{ page }} / {{ totalPages }} </span>
                 <button
                     v-if="page < totalPages"
-                    class="cursor-pointer rounded py-1 text-xs text-white"
+                    class="cursor-pointer rounded py-1 text-xs text-foreground"
                     :disabled="page >= totalPages"
                     @click="$emit('update:page', page + 1)"
                 >

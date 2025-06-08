@@ -18,7 +18,7 @@
                     placeholder="Password"
                     required
                 />
-                <button class="bg-valorant hover:bg-valorant-accent w-full rounded p-2 text-white transition-colors" type="submit">Login</button>
+                <button class="bg-valorant hover:bg-valorant-accent w-full rounded p-2 text-foreground transition-colors" type="submit">Login</button>
             </form>
         </div>
     </Card>

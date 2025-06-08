@@ -1,7 +1,7 @@
 <template>
     <button
         :disabled="disabled"
-        class="flex items-center justify-center gap-2 rounded-lg px-2 py-1 transition-colors duration-250 ease-in-out focus:outline-none"
+        class="flex items-center text-background dark:text-foreground justify-center gap-2 rounded-lg px-2 py-1 transition-colors duration-250 ease-in-out focus:outline-none"
         :class="[
             disabled
                 ? 'bg-muted'

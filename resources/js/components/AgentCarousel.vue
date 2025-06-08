@@ -3,8 +3,8 @@ import { Agent } from '@/types';
 import { computed, onMounted, ref, type ComputedRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-import notSelectedImageSrc from '@/assets/icons/not_selected.png';
-import selectedImageSrc from '@/assets/icons/selected.png';
+import notSelectedImage from '@/assets/icons/not_selected.png';
+import selectedImage from '@/assets/icons/selected.png';
 import Errors from '@/components/Error.vue';
 import Button from './Button.vue';
 import Card from './Card.vue';
@@ -25,14 +25,10 @@ interface GroupedAgents {
 }
 
 const noAnimation = ref(false);
-const selectedImage = ref(new Image());
-const notSelectedImage = ref(new Image());
 
 const errors = ref<string[]>([]);
 
 onMounted(async () => {
-    selectedImage.value.src = selectedImageSrc;
-    notSelectedImage.value.src = notSelectedImageSrc;
 
     await loadAgentImages();
     currentAgent.value = props.agents.find((agent) => agent.selected) || props.agents[0] || null;
@@ -139,7 +135,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
 
             <h2 class="valorant-font text-foreground text-2xl">{{ currentAgent.displayName }}</h2>
             <div class="flex items-center justify-center gap-2">
-                <img class="w-4" :src="currentAgent.role?.displayIcon ?? ''" :alt="currentAgent.role?.displayName" />
+                <img class="w-4 invert dark:invert-0" :src="currentAgent.role?.displayIcon ?? ''" :alt="currentAgent.role?.displayName" />
                 <p>{{ currentAgent.role?.displayName }}</p>
             </div>
 
@@ -150,16 +146,16 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                 <label>{{ t('Skip Animation') }}</label>
                 <img
                     v-if="noAnimation"
-                    class="flex h-6 w-6 cursor-pointer items-center justify-center"
-                    :src="selectedImage.src"
+                    class="flex h-6 w-6 cursor-pointer items-center justify-center invert dark:invert-0"
+                    :src="selectedImage"
                     alt="selected"
                     @click="noAnimation = !noAnimation"
                 />
 
                 <img
                     v-else
-                    class="flex h-6 w-6 cursor-pointer items-center justify-center"
-                    :src="notSelectedImage.src"
+                    class="flex h-6 w-6 cursor-pointer items-center justify-center invert dark:invert-0"
+                    :src="notSelectedImage"
                     alt="not_selected"
                     @click="noAnimation = !noAnimation"
                 />
@@ -197,7 +193,7 @@ const groupedAgents: ComputedRef<GroupedAgents> = computed(() => {
                             @click="agentSelect(agent)"
                         />
                         <span
-                            class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-white opacity-0 transition-opacity group-hover:opacity-100"
+                            class="bg-accent pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 min-w-max -translate-x-1/2 rounded-md px-2 py-1 text-center text-foreground opacity-0 transition-opacity group-hover:opacity-100"
                         >
                             {{ agent.selected ? 'Click to disable' : 'Click to enable' }}
                         </span>
