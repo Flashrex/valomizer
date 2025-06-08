@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Eloquent\SoftDeletes;
+use MongoDB\BSON\UTCDateTime;
 
 class Visits extends Model
 {
@@ -36,5 +39,32 @@ class Visits extends Model
     public static function getIgnoredUserAgents(): array
     {
         return static::$ignored_user_agents;
+    }
+
+    /**
+     *  Get unique visits since a given date.
+     */
+    public static function getUnique(Carbon $since) : Collection {
+        return Visits::raw(function ($collection) use ($since) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        'created_at' => ['$gte' => new UTCDateTime($since->getTimestamp() * 1000)],
+                    ],
+                ],
+                [
+                    '$sort' => ['created_at' => -1],
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$ip',
+                        'doc' => ['$first' => '$$ROOT'],
+                    ],
+                ],
+                [
+                    '$replaceRoot' => ['newRoot' => '$doc'],
+                ],
+            ]);
+        });
     }
 }

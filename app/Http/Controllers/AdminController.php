@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use MongoDB\BSON\UTCDateTime;
+
 
 class AdminController extends Controller
 {
@@ -28,29 +28,7 @@ class AdminController extends Controller
             ]);
         }
 
-        $since = now()->subDay();
-        $uniqueVisits = Visits::raw(function ($collection) use ($since) {
-            return $collection->aggregate([
-                [
-                    '$match' => [
-                        'created_at' => ['$gte' => new UTCDateTime($since->getTimestamp() * 1000)],
-                    ],
-                ],
-                [
-                    '$sort' => ['created_at' => -1],
-                ],
-                [
-                    '$group' => [
-                        '_id' => '$ip',
-                        'doc' => ['$first' => '$$ROOT'],
-                    ],
-                ],
-                [
-                    '$replaceRoot' => ['newRoot' => '$doc'],
-                ],
-            ]);
-        });
-
+        $uniqueVisits = Visits::getUnique(now()->subDay());
         return Inertia::render('admin/Dashboard', [
             'agents' => Agent::all(),
             'maps' => Map::all(),
