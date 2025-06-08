@@ -5,7 +5,7 @@
             <slot name="header"></slot>
         </div>
         <div class="flex items-center gap-2">
-            <label for="search">{{ t('Search:') }}</label>
+            <label for="search">{{ t('Search') }}:</label>
             <input id="search" type="text" class="rounded border p-1"
                 :placeholder="search.length > 0 ? search.join(', ') : t('Search')"
                 @input="$emit('search', ($event.target as HTMLInputElement).value)" />
@@ -85,6 +85,8 @@ import { useI18n } from 'vue-i18n';
 import Divider from './Divider.vue';
 
 const { t } = useI18n();
+
+defineEmits(['search', 'sort', 'update:page']);
 
 const props = defineProps({
     name: { type: String, default: 'Table' },

@@ -1,6 +1,6 @@
 <template>
     <Head title="Agents" />
-    <div class="w-full h-full flex items-center justify-center overflow-hidden">
+    <div class="w-full h-full flex items-start mt-16 justify-center overflow-hidden">
         <AgentCarousel :agents="props.agents" />
     </div>
 </template>

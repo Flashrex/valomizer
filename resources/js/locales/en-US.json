@@ -48,5 +48,11 @@
     "Showing x to y of z entries": "Showing {from} to {to} of {total} entries",
     "Search": "Search",
     "Total Visits": "Total Visits",
-    "Uptime": "Uptime"
+    "Uptime": "Uptime",
+    "DisplayName": "DisplayName",
+    "Fetch agents command executed successfully!": "Fetch agents command executed successfully!",
+    "Fetch maps command executed successfully!": "Fetch maps command executed successfully!",
+    "This website is a tool for finding a random map or agent to play with.": "This website is a tool for finding a random map or agent to play with.",
+    "Contribute": "Contribute",
+    "If you want to contribute to this project, you can find the source code on": "If you want to contribute to this project, you can find the source code on"
 }

@@ -48,5 +48,11 @@
     "Showing x to y of z entries": "Zeige {from} bis {to} von {total} Einträgen",
     "Search": "Suche",
     "Total Visits": "Besucher",
-    "Uptime": "Betriebszeit"
+    "Uptime": "Betriebszeit",
+    "DisplayName": "DisplayName",
+    "Fetch agents command executed successfully!": "Befehl zum Abrufen der Agenten erfolgreich ausgeführt!",
+    "Fetch maps command executed successfully!": "Befehl zum Abrufen der Maps erfolgreich ausgeführt!",
+    "This website is a tool for finding a random map or agent to play with.": "Diese Website ist ein Tool, um eine zufällige Karte oder einen Agenten zum Spielen zu finden.",
+    "Contribute": "Beitragen",
+    "If you want to contribute to this project, you can find the source code on": "Wenn du zu diesem Projekt beitragen möchtest, findest du den Quellcode auf"
 }

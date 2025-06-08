@@ -48,5 +48,11 @@
     "Showing x to y of z entries": "Näytetään {from} - {to} / {total} merkintää",
     "Search": "Etsi",
     "Total Visits": "Kokonaisvierailut",
-    "Uptime": "Käyttöaika"
+    "Uptime": "Käyttöaika",
+    "DisplayName": "Näyttönimi",
+    "Fetch agents command executed successfully!": "Agenttien haku onnistui!",
+    "Fetch maps command executed successfully!": "Karttojen haku onnistui!",
+    "This website is a tool for finding a random map or agent to play with.": "Tämä sivusto on työkalu satunnaisen kartan tai agentin löytämiseen pelattavaksi.",
+    "Contribute": "Osallistu",
+    "If you want to contribute to this project, you can find the source code on": "Jos haluat osallistua tähän projektiin, löydät lähdekoodin osoitteesta"
 }
