@@ -2,7 +2,7 @@
     <Language />
     <Notification />
     <div class="flex">
-        <main class="w-screen h-full">
+        <main class="h-full w-screen">
             <slot />
         </main>
     </div>

@@ -10,10 +10,14 @@
                       'bg-primary hover:bg-primary-accent': color === 'primary',
                       'bg-secondary hover:bg-secondary-accent': color === 'secondary',
                       'bg-destructive hover:bg-destructive-accent': color === 'danger',
-                      'bg-success hover:bg-success-accent': color === 'success'
+                      'bg-success hover:bg-success-accent': color === 'success',
                   },
         ]"
-        :style="color === 'valorant' ? { background: 'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)' } : {}"
+        :style="
+            color === 'valorant'
+                ? { background: 'linear-gradient(135deg, rgb(255, 51, 66) 0%, rgb(255, 48, 64) 0.01%, rgb(255, 125, 102) 100%)' }
+                : {}
+        "
     >
         <slot name="pre" />
         <slot />
