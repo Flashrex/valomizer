@@ -5,14 +5,14 @@
         <div class="w-full">
             <form class="flex flex-col items-center justify-center" @submit.prevent="submit">
                 <input
-                    class="focus:ring-valorant mb-4 w-full rounded border p-2 focus:ring-2 focus:outline-none"
+                    class="focus:ring-valorant mb-4 w-full rounded border p-2 focus:ring-2 focus:outline-none bg-accent dark:bg-card"
                     v-model="form.email"
                     type="email"
                     placeholder="Email"
                     required
                 />
                 <input
-                    class="focus:ring-valorant mb-4 w-full rounded border p-2 focus:ring-2 focus:outline-none"
+                    class="focus:ring-valorant mb-4 w-full rounded border p-2 focus:ring-2 focus:outline-none bg-accent dark:bg-card"
                     v-model="form.password"
                     type="password"
                     placeholder="Password"

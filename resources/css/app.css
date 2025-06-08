@@ -96,7 +96,7 @@
 }
 
 :root {
-    --background: hsl(0 0% 100%);
+    --background: rgb(255, 255, 255);
     --foreground: hsl(0 0% 3.9%);
     --card: hsl(0, 0%, 93%);
     --card-foreground: hsl(0 0% 3.9%);
@@ -142,7 +142,7 @@
 }
 
 .dark {
-    --background: hsl(210, 28%, 14%);
+    --background: rgb(26, 36, 46);
     --foreground: hsl(0 0% 98%);
     --card: hsl(210, 40%, 10%);
     --card-foreground: hsl(0 0% 98%);
