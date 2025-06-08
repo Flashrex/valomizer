@@ -28,9 +28,8 @@ class AdminController extends Controller
             ]);
         }
 
-        
         $since = now()->subDay();
-        $uniqueVisits = Visits::raw(function($collection) use ($since) {
+        $uniqueVisits = Visits::raw(function ($collection) use ($since) {
             return $collection->aggregate([
                 [
                     '$match' => [
