@@ -1,6 +1,6 @@
 <template>
     <Head title="About" />
-    <div class="text-primary mt-16 flex w-full flex-col items-center justify-start gap-8 md:mt-8">
+    <div class="text-primary mt-16 flex w-full flex-col items-center justify-start gap-8">
         <section class="flex flex-col items-center justify-center p-4 text-center">
             <h1 class="text-2xl font-bold">{{ t('About this website') }}</h1>
             <p class="text-sm">{{ t('This website is a tool for finding a random map or agent to play with.') }}</p>
