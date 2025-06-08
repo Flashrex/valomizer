@@ -38,7 +38,7 @@ class AdminController extends Controller
                     ],
                 ],
                 [
-                    '$sort' => ['created_at' => -1], // get the latest visit per IP
+                    '$sort' => ['created_at' => -1],
                 ],
                 [
                     '$group' => [
