@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use MongoDB\BSON\UTCDateTime;
 
 class AdminController extends Controller
 {
@@ -27,13 +28,35 @@ class AdminController extends Controller
             ]);
         }
 
-        $visitsLastTwentyFourHours = Visits::where('created_at', '>=', now()->subDay())->count();
+        
+        $since = now()->subDay();
+        $uniqueVisits = Visits::raw(function($collection) use ($since) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        'created_at' => ['$gte' => new UTCDateTime($since->getTimestamp() * 1000)],
+                    ],
+                ],
+                [
+                    '$sort' => ['created_at' => -1], // get the latest visit per IP
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$ip',
+                        'doc' => ['$first' => '$$ROOT'],
+                    ],
+                ],
+                [
+                    '$replaceRoot' => ['newRoot' => '$doc'],
+                ],
+            ]);
+        });
 
         return Inertia::render('admin/Dashboard', [
             'agents' => Agent::all(),
             'maps' => Map::all(),
             'visits' => [
-                'lastTwentyFourHours' => $visitsLastTwentyFourHours,
+                'lastTwentyFourHours' => $uniqueVisits->count(),
                 'total' => Visits::count(),
             ],
             'uptime' => $startup->updated_at->diffForHumans(),
