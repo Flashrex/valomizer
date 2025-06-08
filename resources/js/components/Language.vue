@@ -59,8 +59,8 @@ onMounted(() => {
                 <li
                     v-for="(language, code) in languages"
                     :key="code"
-                    class="cursor:pointer hover:bg-muted flex items-center gap-2 p-2"
-                    :class="[code === locale ? `selected` : ``]"
+                    class="cursor:pointer hover:bg-background flex items-center gap-2 p-2"
+                    :class="[code === locale ? `font-bold` : `bg-card`]"
                     @click="selectLanguage(code)"
                 >
                     <span class="fi" :class="`fi-${code}`"></span>
@@ -72,13 +72,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.active {
-    background-color: var(--color-background-soft);
-}
-
-.selected {
-    background-color: var(--color-background);
-}
 
 .fade-enter-active,
 .fade-leave-active {
