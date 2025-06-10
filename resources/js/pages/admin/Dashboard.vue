@@ -163,7 +163,7 @@ import timerIcon from '@/assets/icons/timer.svg';
 import deleteIcon from '@/assets/icons/delete.svg';
 import { filterSortPaginate } from '@/util';
 import { useForm } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 const { t } = useI18n();
 
 defineOptions({
@@ -224,7 +224,7 @@ function toggleAgent(agent: Agent) {
         active: !agent.active,
     });
 
-    form.patch(route('agent.update', agent._id), {
+    form.patch(route('agent.update', agent.id), {
         preserveScroll: true,
         onSuccess: () => {
             notify.info(t('Agent status updated successfully!'));
@@ -307,7 +307,7 @@ const toggleMap = (map: Map) => {
         active: !map.active,
     });
 
-    form.patch(route('map.update', map._id), {
+    form.patch(route('map.update', map.id), {
         preserveScroll: true,
         onSuccess: () => {
             notify.info(t('Map status updated successfully!'));
@@ -330,7 +330,7 @@ function updateGamemode(event: Event, map: Map) {
         gamemode: gamemode,
     });
 
-    form.patch(route('map.update', map._id), {
+    form.patch(route('map.update', map.id), {
         preserveScroll: true,
         onSuccess: () => {
             notify.info(t('Gamemode updated successfully!'));
@@ -372,4 +372,8 @@ function runFetchMapsCommand() {
 import { useNotifications } from '@/composables/useNotification';
 import AdministrationLayout from '@/layouts/AdministrationLayout.vue';
 const notify = useNotifications();
+
+onMounted(() => {
+    console.log(props.maps);
+})
 </script>

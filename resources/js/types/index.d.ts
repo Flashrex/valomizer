@@ -21,7 +21,7 @@ export interface PaginatedResponse<T> {
 }
 
 export interface Agent {
-    _id: number;
+    id: number;
     uuid: string;
     active: boolean;
     displayName: string;
@@ -52,7 +52,7 @@ export interface Agent {
 }
 
 export interface Map {
-    _id: number;
+    id: number;
     uuid: string;
     active: boolean;
     displayName: string;
