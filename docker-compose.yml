@@ -26,8 +26,8 @@ services:
     mongodb:
         image: 'mongo'
         environment:
-            - 'MONGODB_INITDB_ROOT_USERNAME=${MONGODB_USERNAME:-}'
-            - 'MONGODB_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD:-}'
+            - 'MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}'
+            - 'MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}'
         volumes:
             - 'sail-mongodb:/data/db'
         ports:

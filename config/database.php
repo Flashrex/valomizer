@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +114,7 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('MONGODB_URI', 'mongodb://localhost:27017'),
+            'dsn' => env('MONGODB_URI', 'mongodb://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@mongodb:27017/valomizer?authSource=admin'),
             'database' => env('MONGODB_DATABASE', 'valomizer'),
         ],
 
