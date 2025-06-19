@@ -27,7 +27,9 @@ return Application::configure(basePath: dirname(__DIR__))
             TrackUniqueVisitor::class,
         ]);
 
-        $middleware->trustProxies(explode(',', env('TRUSTED_PROXIES', '')) ?: []);
+        $middleware->trustProxies([
+            env('TRUSTED_PROXY', ''),
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
