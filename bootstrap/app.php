@@ -26,6 +26,10 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
             TrackUniqueVisitor::class,
         ]);
+
+        $middleware->trustProxies([
+            '172.19.0.1',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
