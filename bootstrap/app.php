@@ -28,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->trustProxies([
-            '172.19.0.1',
+            explode(',', env('TRUSTED_PROXIES', '')) ?: '*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
