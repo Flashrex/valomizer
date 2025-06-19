@@ -28,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->trustProxies(
-            [env('TRUSTED_PROXY', '')]
+            env('TRUSTED_PROXY', '')
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {
