@@ -15,6 +15,7 @@ import esES from './locales/es-ES.json';
 import fiFI from './locales/fi-FI.json';
 import frFR from './locales/fr-FR.json';
 import itIT from './locales/it-IT.json';
+import seSE from './locales/se-SE.json';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -42,6 +43,7 @@ const i18n = createI18n({
         fi: fiFI,
         fr: frFR,
         it: itIT,
+        se: seSE,
     },
 });
 
