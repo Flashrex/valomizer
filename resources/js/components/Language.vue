@@ -13,6 +13,7 @@ const languages = ref({
     es: 'Español',
     it: 'Italiano',
     fi: 'Suomi',
+    sv: 'Svenska',
 });
 
 function selectLanguage(code: string) {
